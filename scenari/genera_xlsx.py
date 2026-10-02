@@ -79,7 +79,7 @@ for i in range(2, last + 1):
         5: f"={I}F{i}",
         6: f"=(B{i}+E{i})*{I}H{i}+{I}I{i}",
         7: f"=D{i}-F{i}",
-        8: f'=IF({BASE}="lordo",B{i},G{i})',
+        8: f'=IF({BASE}="lordo",B{i}+E{i},G{i})',
         9: f"=H{i}*{QUOTA}",
         10: f"=D{i}+E{i}-F{i}-I{i}",
         11: f"={I}D{i}",
@@ -103,27 +103,36 @@ wu.cell(row=r, column=2, value=f"=SUMPRODUCT(B2:B{last},Ipotesi!K2:K{last})").nu
 wu.cell(row=r, column=9, value=f"=SUMPRODUCT(I2:I{last},Ipotesi!K2:K{last})").number_format = "0.00"
 wu.cell(row=r, column=15, value=f"=SUMPRODUCT(O2:O{last},Ipotesi!K2:K{last})").number_format = "0.00"
 wu.cell(row=r, column=16, value=f"=O{r}/B{r}").number_format = "0%"
-for j in (2, 9, 15, 16): wu.cell(row=r, column=j).fill = VER
+wu.cell(row=r, column=7, value=f"=SUMPRODUCT(G2:G{last},Ipotesi!K2:K{last})").number_format = "0.00"
+wu.cell(row=r, column=8, value=f"=SUMPRODUCT((B2:B{last}+E2:E{last}),Ipotesi!K2:K{last})").number_format = "0.00"
+wu.cell(row=r + 2, column=1, value="Medie pesate: colonna G = incassato netto medio per ordine; colonna H = incasso lordo medio (merce + spedizione).")
+for j in (2, 7, 8, 9, 15, 16): wu.cell(row=r, column=j).fill = VER
 SCONTRINO = f"'Conti per prodotto'!$B${r}"
 QUOTA_ORD = f"'Conti per prodotto'!$I${r}"
 MARG_ORD = f"'Conti per prodotto'!$O${r}"
+NETTO_MEDIO = f"'Conti per prodotto'!$G${r}"
+LORDO_MEDIO = f"'Conti per prodotto'!$H${r}"
 r += 1
 wu.cell(row=r, column=1, value="Letture: colonna O = quanto resta a Kalab per ordine dopo prodotto, imballo, spedizione e quota B2Brand. Se è vicino a zero o negativo, con quella quota Kalab lavora gratis.")
 
 # ---------------------------------------------------------------- Costi B2Brand
 wc = wb.create_sheet("Costi B2Brand")
-hdr = ["Voce", "Una tantum (€)", "Mensile anno 1 (€)", "Mensile anno 2 (€)", "Mensile anno 3 (€)", "Fonte / nota"]
+hdr = ["Voce", "Una tantum (€)", "Mensile anno 1 (€)", "Mensile anno 2 (€)", "Mensile anno 3 (€)", "Fonte / nota", "Tipo (cassa = soldi che escono; ore = tempo di B2Brand a 35 €/h)"]
 for j, h in enumerate(hdr, 1):
     c = wc.cell(row=1, column=j, value=h); c.font = B; c.fill = GRI; c.border = BOX
 for i, v in enumerate(COSTI_B2B, 2):
-    for j, x in enumerate([v["voce"], v["una_tantum"], v["m1"], v["m2"], v["m3"], v["fonte"]], 1):
+    for j, x in enumerate([v["voce"], v["una_tantum"], v["m1"], v["m2"], v["m3"], v["fonte"], v["tipo"]], 1):
         c = wc.cell(row=i, column=j, value=x); c.border = BOX
         if 2 <= j <= 5: c.fill = AZZ
 lc = len(COSTI_B2B) + 1
 wc.cell(row=lc + 1, column=1, value="TOTALE").font = B
 for j, col in zip(range(2, 6), "BCDE"):
     c = wc.cell(row=lc + 1, column=j, value=f"=SUM({col}2:{col}{lc})"); c.fill = VER; c.font = B
-wc.column_dimensions["A"].width = 44; wc.column_dimensions["F"].width = 70
+wc.cell(row=lc + 2, column=1, value="di cui SOLO CASSA").font = B
+for j, col in zip(range(2, 6), "BCDE"):
+    c = wc.cell(row=lc + 2, column=j, value=f'=SUMIF($G$2:$G${lc},"cassa",{col}2:{col}{lc})'); c.fill = VER
+wc.cell(row=lc + 3, column=1, value="Nei fogli Scenari si usa il TOTALE (ore comprese). Per vedere il solo esborso di cassa, mettere a zero le righe «ore».")
+wc.column_dimensions["A"].width = 44; wc.column_dimensions["F"].width = 70; wc.column_dimensions["G"].width = 20
 for col in "BCDE": wc.column_dimensions[col].width = 18
 SETUP = f"'Costi B2Brand'!$B${lc+1}"
 MENS = {1: f"'Costi B2Brand'!$C${lc+1}", 2: f"'Costi B2Brand'!$D${lc+1}", 3: f"'Costi B2Brand'!$E${lc+1}"}
@@ -231,20 +240,22 @@ for bi, s in enumerate(("Prudente", "Medio", "Ambizioso")):
 # ---------------------------------------------------------------- Confronto accordi
 wa = wb.create_sheet("Confronto accordi")
 wa.cell(row=1, column=1, value="Cosa succede a un ordine medio con diversi accordi (scenario medio, anno 1)").font = Font(bold=True, size=12)
-hdr = ["Accordo", "Quota B2Brand sul lordo (equivalente)", "B2Brand per ordine (€)", "Kalab margine per ordine (€)", "Kalab margine % prezzo", "Commento"]
+hdr = ["Accordo", "Base (lordo/netto)", "Quota %", "B2Brand per ordine (€)", "Kalab margine per ordine (€)", "Kalab margine % prezzo", "Commento"]
 for j, h in enumerate(hdr, 1):
     c = wa.cell(row=2, column=j, value=h); c.font = B; c.fill = GRI; c.alignment = Alignment(wrap_text=True); c.border = BOX
 wa.row_dimensions[2].height = 40
 for i, a in enumerate(ACCORDI["alternative"], 3):
     wa.cell(row=i, column=1, value=a["nome"]).border = BOX
-    c = wa.cell(row=i, column=2, value=a["quota"]); c.fill = AZZ; c.number_format = "0%"; c.border = BOX
-    # B2Brand per ordine = scontrino * quota ; Kalab = scontrino_margine_pre_quota - quota
-    wa.cell(row=i, column=3, value=f"={SCONTRINO}*B{i}").number_format = "0.00"
-    wa.cell(row=i, column=4, value=f"={MARG_ORD}+{QUOTA_ORD}-C{i}").number_format = "0.00"
-    wa.cell(row=i, column=5, value=f"=D{i}/{SCONTRINO}").number_format = "0%"
-    wa.cell(row=i, column=6, value=a["commento"])
-wa.column_dimensions["A"].width = 46; wa.column_dimensions["F"].width = 80
-for col in "BCDE": wa.column_dimensions[col].width = 16
+    c = wa.cell(row=i, column=2, value=a["base"]); c.fill = AZZ; c.border = BOX
+    c = wa.cell(row=i, column=3, value=a["quota"]); c.fill = AZZ; c.number_format = "0%"; c.border = BOX
+    wa.cell(row=i, column=4, value=f'=IF(B{i}="lordo",{LORDO_MEDIO},{NETTO_MEDIO})*C{i}').number_format = "0.00"
+    wa.cell(row=i, column=5, value=f"={MARG_ORD}+{QUOTA_ORD}-D{i}").number_format = "0.00"
+    wa.cell(row=i, column=6, value=f"=E{i}/{SCONTRINO}").number_format = "0%"
+    wa.cell(row=i, column=7, value=a["commento"])
+    wa.cell(row=i, column=4).fill = VER; wa.cell(row=i, column=5).fill = VER
+wa.cell(row=len(ACCORDI["alternative"]) + 4, column=1, value="Lettura: l'ordine medio è quello del foglio Conti (mix di categorie). Il margine di Kalab è dopo prodotto, imballo, spedizione vera e perdite. Per vedere l'effetto sui 36 mesi, cambiare quota e base nel foglio Ipotesi.")
+wa.column_dimensions["A"].width = 52; wa.column_dimensions["G"].width = 80
+for col in "BCDEF": wa.column_dimensions[col].width = 14
 
 out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scenari_kalab.xlsx")
 wb.save(out)
