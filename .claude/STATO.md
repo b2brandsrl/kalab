@@ -19,7 +19,7 @@ Sì all'idea, no al 50% sull'incasso lordo (Kalab perde 2,80 € a ordine). Prop
 Italia con prodotti che viaggiano, 40% del netto a scaglioni, cassa B2Brand < 4.000 €, soglie scritte.
 
 ## Da fare
-- Davide: creare il repo `b2brandsrl/kalab` su GitHub e fare il primo push (R1: oggi è solo locale).
+- Repo su GitHub `b2brandsrl/kalab` dal 02/10 sera (push fatto da Davide).
 - Davide: Keyword Planner e Meta Ads Manager in lettura (cap. 14 del report).
 - Incontro con Luciano: le 12 domande del cap. 13. Avvocato e commercialista: cap. 7.
 - Buchi di ricerca (cap. 15) solo se servono per decidere.
