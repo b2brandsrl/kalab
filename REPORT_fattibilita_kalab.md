@@ -390,9 +390,12 @@ primavera. **Fresco**: in azienda, ai locali, e online solo in prevendita stagio
 - **IVA**: fresco 4%; secco, polvere, conserve, salse, piante e semi 10% (voci della Tabella A da
   confermare col commercialista). Regime speciale agricolo: cap. 7.
 - **Estero UE**: sotto 10.000 €/anno IVA italiana; sopra, OSS (dichiarazione trimestrale).
-  **Imballaggi**: Germania LUCID gratis + licenza da 39 €/anno; Francia Citeo/Triman dal primo pacco
-  (STIMA 80-100 €/anno); Spagna e Austria con rappresentante (STIMA 200-800 €/anno): attivare quando il
-  paese pesa.
+  **Imballaggi**: Germania LUCID gratis + licenza da 39 €/anno e, dal 12/08/2026, un rappresentante
+  autorizzato per chi non ha sede in Germania (circa 250 €/anno; aggiornato il 04/10, ricerca/ambizioso/04
+  §4.2); Francia Citeo/Triman dal primo pacco (STIMA 80-100 €/anno); Spagna e Austria con rappresentante
+  (STIMA 200-800 €/anno): attivare quando il paese pesa. **Per tutti i negozi online UE**: dal 19/06/2026
+  il pulsante di recesso è obbligatorio, anche in Italia, e il link alla piattaforma europea delle liti
+  (chiusa dal 20/07/2025) va tolto.
 - **UK**: sotto 135 £ l'IVA la riscuote il venditore (registrazione HMRC); piante e semi solo con
   certificato fitosanitario: non vendibili ai privati. **Svizzera**: pagine ufficiali non raggiunte.
 
