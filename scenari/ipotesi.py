@@ -116,13 +116,13 @@ TRE_PL = dict(pick_pack=2.0, materiali=0.75, pallet_mese=40.0, pallet_n=2, rifor
               spedizione_da_hub=5.0)
 
 
-# «Ambizioso: cosa serve» — dagli ordini obiettivo ai numeri del sito. Valori PROVVISORI: si aggiornano
-# con ricerca/ambizioso/02_benchmark_e_numeri.md. Ogni voce: (valore anno 1, anno 2, anno 3, nota).
+# «Ambizioso - cosa serve» — dagli ordini obiettivo ai numeri del sito. Valori dal filone
+# ricerca/ambizioso/02_benchmark_e_numeri.md (04/10/2026). Ogni voce: (valore anno 1, anno 2, anno 3, nota).
 FUNNEL = dict(
-    conversione=(0.015, 0.020, 0.025, "tasso di conversione del sito (ordini ÷ visite)"),
-    ritorno=(0.20, 0.35, 0.45, "quota degli ordini fatta da clienti che hanno già comprato"),
-    cpc=(0.60, 0.70, 0.80, "costo medio di un clic a pagamento (€)"),
-    cac=(25.0, 25.0, 25.0, "costo pubblicitario per un cliente nuovo (€)"),
-    quota_email=(0.15, 0.25, 0.30, "quota degli ordini che arriva dalla newsletter"),
-    ordini_per_1000_iscritti=(8.0, 8.0, 8.0, "ordini al mese ogni 1.000 iscritti alla newsletter"),
+    conversione=(0.012, 0.016, 0.019, "da 0,8% (negozio nuovo) a 2,2%; mediana piccoli Shopify 1,4% (Littledata 09/2026); Food & Drink UK 1,58% (IRP 08/2026) — 02 §1.1 e §3"),
+    ritorno=(0.25, 0.28, 0.35, "riacquisto medio simulato (02 §2.3): nei prodotti di consumo ricompra entro un anno il 30-40% dei clienti"),
+    cpc=(0.70, 0.70, 0.70, "clic medio fra Google Shopping (~0,55 €) e Meta (~1 €) — 05 §5, 02 §2.1"),
+    cac=(35.0, 35.0, 35.0, "benchmark food 25-50 € (02 §1.5); sostenibile ≤ 20 € con ordine medio 28 €, ≤ 29 € con 40 €"),
+    quota_email=(0.13, 0.16, 0.20, "simulazione 02 §2.4 (13-23%); media degli account Klaviyo 19% del fatturato"),
+    ordini_per_1000_iscritti=(8.5, 8.5, 8.5, "4 campagne al mese × 0,17% + benvenuto e carrelli (02 §2.1 e §2.4)"),
 )

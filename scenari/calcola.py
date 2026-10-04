@@ -11,7 +11,7 @@ Due modelli di accordo:
   pubblicità e piattaforma. B2Brand anticipa i costi e se li riprende per prima nei mesi buoni;
   Kalab non mette mai soldi di tasca (al peggio, in un mese, rientra solo dei costi del prodotto).
 """
-import sys, os
+import sys, os, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from ipotesi import CATEGORIE, SCENARI, COSTI_B2B, STAGIONE, ACCORDI, CORSA_HUB, TRE_PL
 
@@ -42,13 +42,41 @@ def setup():
     return sum(v["una_tantum"] for v in COSTI_B2B)
 
 
+def arrot(x):
+    """Arrotonda come ROUND di Excel (0,5 verso l'alto), non come round di Python."""
+    return int(math.floor(x + 0.5)) if x >= 0 else -int(math.floor(-x + 0.5))
+
+
+def peso_mese(m):
+    return STAGIONE["pesi"][(STAGIONE["mese_avvio"] - 1 + m - 1) % 12]
+
+
+def tendenze(p):
+    """Crescita continua: dalla fine dell'anno 1 (= ordini1) la tendenza sale in linea retta, anno per anno,
+    fino al valore che dà lo stesso totale annuo di «media × 12». Restituisce (fine anno 2, fine anno 3)."""
+    somma_pesi = sum(STAGIONE["pesi"])
+    fattore = sum(k * peso_mese(k) for k in range(1, 13)) / 12
+    e2 = p["ordini1"] + (12 * p["ordini2"] - p["ordini1"] * somma_pesi) / fattore
+    e3 = e2 + (12 * p["ordini3"] - e2 * somma_pesi) / fattore
+    return e2, e3
+
+
+def ordini_mese(p, m):
+    anno = (m - 1) // 12 + 1
+    if anno == 1:
+        return arrot(p["ordini1"] * min(1, m / p["rampa"]) * peso_mese(m))
+    e2, e3 = tendenze(p)
+    inizio, fine = (p["ordini1"], e2) if anno == 2 else (e2, e3)
+    k = m - 12 * (anno - 1)
+    return arrot((inizio + (fine - inizio) * k / 12) * peso_mese(m))
+
+
 def scenario(nome, modello, quota, base, obiettivo):
     p = SCENARI[nome]; md = medie(quota, base)
     rows = []; R = 0.0; cum_b = cum_k = 0.0
     for m in range(1, 37):
         anno = (m - 1) // 12 + 1
-        peso = STAGIONE["pesi"][(STAGIONE["mese_avvio"] - 1 + m - 1) % 12]
-        ordini = round(p[f"ordini{anno}"] * (min(1, m / p["rampa"]) if anno == 1 else 1) * peso)
+        ordini = ordini_mese(p, m)
         costi = costi_mese(anno) + (setup() if m == 1 else 0) + p[f"adv{anno}"]
         lordo_k = ordini * md["pool"]                  # quello che resta a Kalab prima di versare a B2Brand
         if modello == "margine":
@@ -59,9 +87,11 @@ def scenario(nome, modello, quota, base, obiettivo):
             T = ordini * md["quota"]
         netto_b = T - costi; netto_k = lordo_k - T
         cum_b += netto_b; cum_k += netto_k
-        rows.append(dict(m=m, anno=anno, ordini=ordini, incasso=ordini * md["scontrino"], netto_b=netto_b, netto_k=netto_k, cum_b=cum_b, cum_k=cum_k))
+        # misura per l'obiettivo: con «margine» la metà del guadagno del mese (senza i rimborsi a B2Brand)
+        misura = (lordo_k - costi) / 2 if modello == "margine" else netto_b
+        rows.append(dict(m=m, anno=anno, ordini=ordini, incasso=ordini * md["scontrino"], netto_b=netto_b, netto_k=netto_k, cum_b=cum_b, cum_k=cum_k, misura=misura))
     def tot(k, a): return sum(r[k] for r in rows[12 * (a - 1):12 * a])
-    primo = next((r["m"] for r in rows if r["netto_b"] >= obiettivo), None)
+    primo = next((r["m"] for r in rows if r["misura"] >= obiettivo), None)
     rientro = next((r["m"] for r in rows if r["m"] > 1 and r["cum_b"] >= 0), None)
     return dict(md=md, rows=rows, primo=primo, rientro=rientro, esposizione=min(r["cum_b"] for r in rows),
                 ordini=[tot("ordini", a) for a in (1, 2, 3)], incasso=[tot("incasso", a) for a in (1, 2, 3)],
@@ -113,7 +143,7 @@ if __name__ == "__main__":
         print(f"   ordini/anno {s['ordini']} · vendite/anno {[round(x) for x in s['incasso']]}")
         print(f"   B2Brand netto/anno {[round(x) for x in s['netto_b']]} · al mese {[round(x/12) for x in s['netto_b']]}")
         print(f"   Kalab   netto/anno {[round(x) for x in s['netto_k']]} · al mese {[round(x/12) for x in s['netto_k']]}")
-        print(f"   primo mese B2Brand ≥ {ob}: {s['primo']} · rientro B2Brand mese {s['rientro']} · esposizione {s['esposizione']:,.0f} · ordini/mese per l'obiettivo {[round(x) for x in need]}")
+        print(f"   primo mese a quota {ob} (metà del guadagno): {s['primo']} · rientro B2Brand mese {s['rientro']} · esposizione {s['esposizione']:,.0f} · ordini/mese per l'obiettivo {[round(x) for x in need]}")
     h = corsa_hub()
     print(f"\n== CORSA ALL'HUB: {h['euro']:.0f} € e {h['ore']:.1f} h a corsa · {h['euro_mese']:,.0f} € e {h['ore_mese']:.0f} h al mese ==")
     for o in (50, 150, 300, 1000):

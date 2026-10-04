@@ -164,6 +164,15 @@ for i, (m, p, nota) in enumerate(zip(mesi, STAGIONE["pesi"], STAGIONE["note"]), 
     wsg.cell(row=i, column=3, value=nota)
 wsg.cell(row=14, column=1, value="Somma (deve fare 12)").font = B
 wsg.cell(row=14, column=2, value="=SUM(B2:B13)").fill = VER
+wsg.cell(row=1, column=4, value="Mese del piano nell'anno (1 = mese di avvio)").font = B
+wsg.cell(row=1, column=5, value="Mese del piano × peso").font = B
+for i in range(12):
+    k = (i - (STAGIONE["mese_avvio"] - 1)) % 12 + 1
+    wsg.cell(row=2 + i, column=4, value=k)
+    wsg.cell(row=2 + i, column=5, value=f"=D{2+i}*B{2+i}")
+wsg.cell(row=14, column=4, value="Fattore di crescita (somma ÷ 12)").font = B
+wsg.cell(row=14, column=5, value="=SUM(E2:E13)/12").fill = VER
+wsg.column_dimensions["D"].width = 22; wsg.column_dimensions["E"].width = 16
 wsg.column_dimensions["C"].width = 80
 
 # ---------------------------------------------------------------- Scenari
@@ -173,7 +182,7 @@ hdr = ["Parametro", "Prudente", "Medio", "Ambizioso", "Nota"]
 for j, h in enumerate(hdr, 1):
     c = wsc.cell(row=2, column=j, value=h); c.font = B; c.fill = GRI; c.border = BOX
 righe = [
-    ("Ordini al mese, media anno 1", "ordini1"),
+    ("Ordini al mese a regime, anno 1 (dopo la rampa)", "ordini1"),
     ("Ordini al mese, media anno 2", "ordini2"),
     ("Ordini al mese, media anno 3", "ordini3"),
     ("Mesi di rampa prima del regime (anno 1)", "rampa"),
@@ -197,11 +206,18 @@ for k, a in enumerate((1, 2, 3)):
                      value=f'=ROUND(IF({MODELLO}="margine",(2*{OBIETTIVO}+{CASSA_MENS[a]}+{adv})/{POOL},({OBIETTIVO}+{CASSA_MENS[a]}+{adv})/{QUOTA_ORD}),0)')
         c.fill = VER; c.border = BOX
 wsc.cell(row=10, column=5, value="Con «margine» l'obiettivo vale per entrambi: B2Brand e Kalab prendono la stessa cifra.")
+wsc.cell(row=13, column=1, value="Tendenza a fine anno 2 (ordini al mese senza stagionalità)").font = B
+wsc.cell(row=14, column=1, value="Tendenza a fine anno 3 (ordini al mese senza stagionalità)").font = B
+for bi in range(3):
+    col_s = get_column_letter(2 + bi)
+    c = wsc.cell(row=13, column=2 + bi, value=f"={col_s}$3+({col_s}$4*12-{col_s}$3*Stagionalità!$B$14)/Stagionalità!$E$14"); c.fill = VER; c.number_format = "#,##0"; c.border = BOX
+    c = wsc.cell(row=14, column=2 + bi, value=f"={col_s}$13+({col_s}$5*12-{col_s}$13*Stagionalità!$B$14)/Stagionalità!$E$14"); c.fill = VER; c.number_format = "#,##0"; c.border = BOX
+wsc.cell(row=13, column=5, value="Crescita continua: dalla fine dell'anno 1 gli ordini salgono in linea retta, con lo stesso totale annuo di «media × 12». Niente salti a marzo.")
 start = 16
 wsc.cell(row=start - 1, column=1, value="Proiezione mese per mese (formule). Netto = soldi in tasca, prima delle tasse.").font = Font(bold=True, size=12)
 cols = ["Mese", "Anno", "Ordini", "Vendite online (€)", "Margine da dividere (€)", "Spese B2Brand (€)", "Pubblicità (€)",
         "Da recuperare per B2Brand (€)", "Versato a B2Brand (€)", "Netto B2Brand (€)", "Cumulato B2Brand (€)",
-        "Netto Kalab (€)", "Cumulato Kalab (€)", "(appoggio) mese B2Brand sopra obiettivo", "(appoggio) mese B2Brand in attivo"]
+        "Netto Kalab (€)", "Cumulato Kalab (€)", "(appoggio) mese a quota obiettivo", "(appoggio) mese B2Brand in attivo"]
 for bi, s in enumerate(("Prudente", "Medio", "Ambizioso")):
     c0 = 1 + bi * (len(cols) + 1)
     col_s = get_column_letter(2 + bi)
@@ -216,8 +232,13 @@ for bi, s in enumerate(("Prudente", "Medio", "Ambizioso")):
         mese_cal = (STAGIONE["mese_avvio"] - 1 + (m - 1)) % 12 + 2
         ordini_base = f"{col_s}${R0 + anno - 1}"
         rampa = f"{col_s}${R0 + 3}"
-        ordini = (f"=ROUND({ordini_base}*MIN(1,{m}/{rampa})*Stagionalità!$B${mese_cal},0)" if anno == 1
-                  else f"=ROUND({ordini_base}*Stagionalità!$B${mese_cal},0)")
+        if anno == 1:
+            ordini = f"=ROUND({ordini_base}*MIN(1,{m}/{rampa})*Stagionalità!$B${mese_cal},0)"
+        else:
+            inizio = f"{col_s}${R0}" if anno == 2 else f"{col_s}$13"
+            fine = f"{col_s}${11 + anno}"
+            k = m - 12 * (anno - 1)
+            ordini = f"=ROUND(({inizio}+({fine}-{inizio})*{k}/12)*Stagionalità!$B${mese_cal},0)"
         pool_prev = f"({L(4)}{rr-1}-{L(5)}{rr-1}-{L(6)}{rr-1})"
         pool = f"({L(4)}{rr}-{L(5)}{rr}-{L(6)}{rr})"
         vals = [m, anno, ordini,
@@ -231,7 +252,7 @@ for bi, s in enumerate(("Prudente", "Medio", "Ambizioso")):
                 f"={L(9)}{rr}" if m == 1 else f"={L(10)}{rr-1}+{L(9)}{rr}",
                 f"={L(4)}{rr}-{L(8)}{rr}",
                 f"={L(11)}{rr}" if m == 1 else f"={L(12)}{rr-1}+{L(11)}{rr}",
-                f'=IF({L(9)}{rr}>={OBIETTIVO},{L(0)}{rr},"")',
+                f'=IF(IF({MODELLO}="margine",({L(4)}{rr}-{L(5)}{rr}-{L(6)}{rr})/2,{L(9)}{rr})>={OBIETTIVO},{L(0)}{rr},"")',
                 f'=IF(AND({L(0)}{rr}>1,{L(10)}{rr}>=0),{L(0)}{rr},"")']
         for j, v in enumerate(vals):
             c = wsc.cell(row=rr, column=c0 + j, value=v); c.border = BOX
@@ -248,7 +269,7 @@ for bi, s in enumerate(("Prudente", "Medio", "Ambizioso")):
         ("…al mese", [f"=SUM({anno_rng(9,a)})/12" for a in (1, 2, 3)]),
         ("Netto Kalab anno 1 / 2 / 3", [f"=SUM({anno_rng(11,a)})" for a in (1, 2, 3)]),
         ("…al mese", [f"=SUM({anno_rng(11,a)})/12" for a in (1, 2, 3)]),
-        ("Primo mese con B2Brand ≥ obiettivo", [f'=IF(MIN({L(13)}{first}:{L(13)}{lastm})=0,"oltre 36",MIN({L(13)}{first}:{L(13)}{lastm}))']),
+        ("Primo mese a quota obiettivo (con «margine»: metà del guadagno del mese)", [f'=IF(MIN({L(13)}{first}:{L(13)}{lastm})=0,"oltre 36",MIN({L(13)}{first}:{L(13)}{lastm}))']),
         ("Primo mese col cumulato B2Brand ≥ 0", [f'=IF(MIN({L(14)}{first}:{L(14)}{lastm})=0,"oltre 36",MIN({L(14)}{first}:{L(14)}{lastm}))']),
         ("Massimo che B2Brand ha «fuori» (€)", [f"=MIN(0,MIN({L(10)}{first}:{L(10)}{lastm}))"]),
     ]
