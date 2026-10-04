@@ -27,7 +27,7 @@ terzo. Vuol dire circa **152.000 € di vendite online nel terzo anno** e circa 
 per B2Brand e Kalab (STIMA dal modello, «metà del guadagno»).
 
 **Si può fare, ma è il risultato di un caso riuscito, non di un caso medio.** L'unico negozio di piccante
-con dati completi arrivato a quella cifra, Flaming Licks in Inghilterra, ci ha messo più di quattro anni
+con dati completi arrivato a una cifra simile, Flaming Licks in Inghilterra, ci ha messo più di quattro anni
 (ambizioso/01). Nessun canale da solo porta quei numeri, e la pubblicità ne porta solo 10-20 su 100
 (ambizioso/03). Il resto lo deve fare il marchio: gente che lo conosce prima del lancio, un prodotto
 eroe, la gara del campione, i regali, chi ricompra.
@@ -40,7 +40,7 @@ eroe, la gara del campione, i regali, chi ricompra.
 | Visite al sito al mese | circa 30.000, e 9 su 10 devono arrivare senza pagare il clic | STIMA (ambizioso/02 §2.2, §2.5) |
 | Clienti nuovi al mese | circa 290 | STIMA (ambizioso/02 §2.3) |
 | Ordini di chi ricompra | circa un terzo | STIMA (ambizioso/02 §2.3) |
-| Iscritti alla newsletter | circa 13.000 | STIMA (ambizioso/02 §2.4) |
+| Iscritti alla newsletter | ne servono circa 13.000; col ritmo normale se ne raccolgono circa 10.800 | STIMA (ambizioso/02 §2.4) |
 | Ordine medio | da 28 € a 38-40 €: con 40 € e spedizione pagata bastano circa 320 ordini al mese per lo stesso guadagno | STIMA (ambizioso/02 §2.6, ambizioso/05) |
 | Guadagno a testa | circa 3.000 € al mese; il primo mese sopra 1.000 € a testa è dicembre 2027 | STIMA (modello) |
 
@@ -55,8 +55,9 @@ eroe, la gara del campione, i regali, chi ricompra.
 3. **Il regalo.** Calendario dell'Avvento delle 24 varietà (in Italia non lo fa nessuno), box a 29,90,
    49,90 e 89,90 €, regali aziendali. È quello che porta l'ordine medio verso 38-40 €.
 4. **La gara diventa prodotto.** Linea del Campione con Francavilla, lancio allo Scalìa Fest di luglio
-   2027. Mai chiamarla «sfida» né «crema da allenamento»: le autorità tedesche sconsigliano proprio i
-   prodotti per le gare, e in Italia l'Antitrust ha fatto ritirare una «Hot Chip Challenge» nel 2024.
+   2027. Mai chiamarla «sfida» né «crema da allenamento»: l'istituto tedesco per la sicurezza alimentare
+   mette in guardia proprio dalle gare di mangiatori, e in Italia l'Antitrust ha fatto ritirare una «Hot
+   Chip Challenge» nel 2024.
 5. **Chi ricompra.** Newsletter dal primo giorno, che nel terzo anno diventa il primo canale; «porta un
    amico»; un Club delle varietà ogni due mesi.
 6. **Google senza pagare.** Una scheda vera per ogni varietà, 10-15 al mese, con foto e dati propri; premi
@@ -98,8 +99,8 @@ eroe, la gara del campione, i regali, chi ricompra.
 
 ### I soldi, in breve
 
-- **B2Brand anticipa** l'avvio, la piattaforma e la pubblicità: 6.000, 12.000 e 18.000 € l'anno nei tre
-  anni. Se li riprende per primi dal guadagno.
+- **B2Brand anticipa** la pubblicità, 6.000, 12.000 e 18.000 € l'anno nei tre anni, più avvio e
+  piattaforma. Se li riprende per primi dal guadagno.
 - **Fondi pubblici realistici nel 2027**, chiesti da Kalab: circa 20.000 € fra voucher digitali, fiere,
   AI Lab, macchinari e certificazione IGP. Sono rimborsi di spese da anticipare (ambizioso/06).
 - **Per la Germania la leva è ICE**, che paga le campagne su Amazon.de e Kaufland.de. SIMEST arriva troppo
@@ -306,7 +307,7 @@ in ambizioso/03 §10). Budget pubblicitario diviso fra Google, Meta, Amazon e po
 
 | Leva | STIMA a regime |
 |---|---|
-| Club delle varietà a pieno | 100-150 abbonati = altrettanti ordini al mese |
+| Club delle varietà a pieno | 100-150 abbonati, cioè 50-75 ordini al mese con la consegna ogni 2 mesi |
 | Germania e Austria a pieno, con stock in Germania | +100-200 ordini al mese dal quarto anno |
 | Regali aziendali di Natale | 10 aziende × 30 box = 300 box a dicembre |
 | Un format video proprio, «La scala di Kalab» | non stimabile; alimenta tutti i canali |
@@ -351,10 +352,10 @@ in ambizioso/03 §10). Budget pubblicitario diviso fra Google, Meta, Amazon e po
 
 - **Dicembre 2027**: circa 10 ordini per giorno lavorativo. Li regge Kalab, con un aiuto nelle settimane
   di Natale.
-- **Dicembre 2028**: circa 31 al giorno. Prima di quel Natale serve il **magazzino conto terzi vicino
+- **Dicembre 2028**: circa 31 per giorno lavorativo. Prima di quel Natale serve il **magazzino conto terzi vicino
   all'hub** del report (cap. 4.7): a quei volumi costa quanto spedire da Scalea, spedisce in 24 ore in
   tutta Italia e libera Luciano.
-- **Dicembre 2029**: circa 49 al giorno. Senza magazzino non è fattibile.
+- **Dicembre 2029**: circa 49 per giorno lavorativo. Senza magazzino non è fattibile.
 - **Lo stock di Natale si prepara a settembre.** Esempio STIMA: 300 calendari costano 4.000-6.600 € di
   materiali prima di venderne uno. Va deciso chi lo anticipa (proposta in 7.2).
 
