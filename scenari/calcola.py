@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
-"""Gemello in Python del foglio Excel: stessi conti, stampa i risultati per il report."""
+"""Gemello in Python del foglio Excel: stessi conti, stampa i risultati per il report.
+
+Uso:  python3 scenari/calcola.py [quota] [lordo|netto]
+      (senza argomenti usa quota e base di ipotesi.ACCORDI)
+"""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from ipotesi import CATEGORIE, SCENARI, COSTI_B2B, STAGIONE, ACCORDI
+from ipotesi import CATEGORIE, SCENARI, COSTI_B2B, STAGIONE, ACCORDI, CORSA_HUB, TRE_PL
+
+ORA_B2B = 35.0  # valore di un'ora interna di B2Brand (lo stesso dei Costi B2Brand)
+
 
 def conti(cat, quota, base):
     B = cat["prezzo"]; C = B - B / (1 + cat["iva"]); D = B - C; E = cat["sped_cliente"]
@@ -11,56 +18,109 @@ def conti(cat, quota, base):
     I = H * quota; J = D + E - F - I
     N = (B + cat["sped_vera"]) * cat["resi"]
     O = J - cat["costo"] - cat["imballo"] - cat["sped_vera"] - N
-    return dict(prezzo=B, netto_iva=D, comm=F, netto=G, base=H, quota=I, resta=J, margine=O, pct=O / B, pct_suo=(O / J if J else 0))
+    return dict(prezzo=B, netto=G, quota=I, resta=J, margine=O, pct=O / B)
+
 
 def medie(quota, base):
-    s = q = m = 0
+    s = q = m = n = 0
     for c in CATEGORIE:
-        r = conti(c, quota, base); s += r["prezzo"] * c["mix"]; q += r["quota"] * c["mix"]; m += r["margine"] * c["mix"]
-    return s, q, m
+        r = conti(c, quota, base)
+        s += r["prezzo"] * c["mix"]; q += r["quota"] * c["mix"]; m += r["margine"] * c["mix"]; n += r["netto"] * c["mix"]
+    return s, q, m, n
 
-def scenario(nome, quota, base, solo_cassa=False):
-    p = SCENARI[nome]; S, Q, M = medie(quota, base)
-    voci = [v for v in COSTI_B2B if solo_cassa is False or v["tipo"] == "cassa"]
-    setup = sum(v["una_tantum"] for v in voci)
-    mens = {1: sum(v["m1"] for v in voci), 2: sum(v["m2"] for v in voci), 3: sum(v["m3"] for v in voci)}
-    ore_setup = sum(v["una_tantum"] for v in COSTI_B2B if v["tipo"] == "ore") / 35.0
-    ore_mens = {a: sum(v[f"m{a}"] for v in COSTI_B2B if v["tipo"] == "ore") / 35.0 for a in (1, 2, 3)}
-    cum = 0; rows = []; rientro = None; minimo = 0
+
+def costi_mese(anno):
+    cassa = sum(v[f"m{anno}"] for v in COSTI_B2B if v["tipo"] == "cassa")
+    ore = sum(v[f"m{anno}"] for v in COSTI_B2B if v["tipo"] == "ore")
+    return cassa, ore
+
+
+def setup():
+    cassa = sum(v["una_tantum"] for v in COSTI_B2B if v["tipo"] == "cassa")
+    ore = sum(v["una_tantum"] for v in COSTI_B2B if v["tipo"] == "ore")
+    return cassa, ore
+
+
+def scenario(nome, quota, base, obiettivo):
+    p = SCENARI[nome]; S, Q, M, _ = medie(quota, base)
+    set_cassa, set_ore = setup()
+    rows = []; cum_cassa = cum_pieno = 0; primo_obiettivo = None
     for m in range(1, 37):
         anno = (m - 1) // 12 + 1
         peso = STAGIONE["pesi"][(STAGIONE["mese_avvio"] - 1 + m - 1) % 12]
-        base_o = p[f"ordini{anno}"]
-        ordini = round(base_o * (min(1, m / p["rampa"]) if anno == 1 else 1) * peso)
+        ordini = round(p[f"ordini{anno}"] * (min(1, m / p["rampa"]) if anno == 1 else 1) * peso)
         incasso = ordini * S; quota_b = ordini * Q; marg_k = ordini * M
-        fissi = mens[anno] + (setup if m == 1 else 0); adv = p[f"adv{anno}"]
-        ris = quota_b - fissi - adv; cum += ris; minimo = min(minimo, cum)
-        if rientro is None and cum >= 0 and m > 1: rientro = m
-        rows.append((m, anno, ordini, incasso, quota_b, marg_k, fissi, adv, ris, cum))
-    def somma(k, a, b): return sum(r[k] for r in rows[a:b])
-    return dict(scontrino=S, quota_ordine=Q, margine_ordine=M,
-                ordini12=somma(2, 0, 12), ordini36=somma(2, 0, 36), incasso12=somma(3, 0, 12), incasso36=somma(3, 0, 36),
-                quota12=somma(4, 0, 12), quota36=somma(4, 0, 36), costi12=somma(6, 0, 12) + somma(7, 0, 12), costi36=somma(6, 0, 36) + somma(7, 0, 36),
-                ris12=rows[11][9], ris36=rows[35][9], margk12=somma(5, 0, 12), margk36=somma(5, 0, 36), rientro=rientro, esposizione=minimo, rows=rows,
-                ore36=ore_setup + 12 * (ore_mens[1] + ore_mens[2] + ore_mens[3]), ore12=ore_setup + 12 * ore_mens[1])
+        cassa, ore = costi_mese(anno)
+        if m == 1: cassa += set_cassa; ore += set_ore
+        adv = p[f"adv{anno}"]
+        netto_cassa = quota_b - cassa - adv
+        netto_pieno = netto_cassa - ore
+        cum_cassa += netto_cassa; cum_pieno += netto_pieno
+        if primo_obiettivo is None and netto_cassa >= obiettivo: primo_obiettivo = m
+        rows.append(dict(m=m, anno=anno, ordini=ordini, incasso=incasso, quota=quota_b, marg_k=marg_k,
+                         cassa=cassa, adv=adv, ore=ore, netto_cassa=netto_cassa, netto_pieno=netto_pieno,
+                         cum_cassa=cum_cassa, cum_pieno=cum_pieno))
+    def tot(k, a, b): return sum(r[k] for r in rows[a:b])
+    rientro_cassa = next((r["m"] for r in rows if r["m"] > 1 and r["cum_cassa"] >= 0 and all(x["cum_cassa"] >= 0 for x in rows[r["m"] - 1:])), None)
+    rientro_pieno = next((r["m"] for r in rows if r["m"] > 1 and r["cum_pieno"] >= 0 and all(x["cum_pieno"] >= 0 for x in rows[r["m"] - 1:])), None)
+    return dict(S=S, Q=Q, M=M, rows=rows,
+                ordini=[tot("ordini", 0, 12), tot("ordini", 12, 24), tot("ordini", 24, 36)],
+                incasso=[tot("incasso", 0, 12), tot("incasso", 12, 24), tot("incasso", 24, 36)],
+                quota=[tot("quota", 0, 12), tot("quota", 12, 24), tot("quota", 24, 36)],
+                netto_cassa=[tot("netto_cassa", 0, 12), tot("netto_cassa", 12, 24), tot("netto_cassa", 24, 36)],
+                netto_pieno=[tot("netto_pieno", 0, 12), tot("netto_pieno", 12, 24), tot("netto_pieno", 24, 36)],
+                marg_k=[tot("marg_k", 0, 12), tot("marg_k", 12, 24), tot("marg_k", 24, 36)],
+                ore=[tot("ore", 0, 12) / ORA_B2B, tot("ore", 12, 24) / ORA_B2B, tot("ore", 24, 36) / ORA_B2B],
+                primo_obiettivo=primo_obiettivo, rientro_cassa=rientro_cassa, rientro_pieno=rientro_pieno,
+                esposizione=min(r["cum_cassa"] for r in rows))
+
+
+def ordini_per_obiettivo(quota, base, obiettivo, adv, anno=1, con_ore=False):
+    _, Q, _, _ = medie(quota, base)
+    cassa, ore = costi_mese(anno)
+    return (obiettivo + cassa + adv + (ore if con_ore else 0)) / Q
+
+
+def corsa_hub():
+    c = CORSA_HUB
+    km = 2 * c["km_andata"]
+    euro = 2 * c["carburante_andata"] + km * c["usura_km"]
+    ore = 2 * c["ore_andata"] + c["ore_al_deposito"]
+    return dict(km=km, euro=euro, ore=ore, euro_mese=euro * c["giorni_al_mese"], ore_mese=ore * c["giorni_al_mese"],
+                euro_mese_con_tempo=(euro + ore * c["valore_ora"]) * c["giorni_al_mese"])
+
+
+def tre_pl_per_ordine(ordini_mese):
+    t = TRE_PL
+    fissi = t["pallet_mese"] * t["pallet_n"] + t["rifornimento_mese"]
+    return t["pick_pack"] + t["materiali"] + fissi / max(ordini_mese, 1)
+
 
 if __name__ == "__main__":
     quota = float(sys.argv[1]) if len(sys.argv) > 1 else ACCORDI["quota_base"]
     base = sys.argv[2] if len(sys.argv) > 2 else ACCORDI["base"]
-    print(f"== quota B2Brand {quota:.0%} su base '{base}' ==")
-    print(f"{'ordine tipo':48} {'prezzo':>7} {'quota':>7} {'resta':>7} {'margine':>8} {'%prezzo':>8}")
+    obiettivo = ACCORDI.get("obiettivo_mese", 1000)
+    print(f"== quota B2Brand {quota:.0%} su base '{base}' · obiettivo B2Brand {obiettivo} €/mese di cassa ==")
+    print(f"{'ordine tipo':46} {'prezzo':>7} {'a B2B':>7} {'Kalab':>7} {'%':>5}  mix")
     for c in CATEGORIE:
         r = conti(c, quota, base)
-        print(f"{c['nome'][:48]:48} {r['prezzo']:7.2f} {r['quota']:7.2f} {r['resta']:7.2f} {r['margine']:8.2f} {r['pct']:8.0%}")
-    S, Q, M = medie(quota, base)
-    print(f"{'MEDIA PESATA':48} {S:7.2f} {Q:7.2f} {'':7} {M:8.2f} {M/S:8.0%}")
-    ln = sum(conti(c, quota, base)["netto"] * c["mix"] for c in CATEGORIE); ll = sum((c["prezzo"] + c["sped_cliente"]) * c["mix"] for c in CATEGORIE)
-    print(f"   incassato netto medio per ordine {ln:.2f} € · incasso lordo medio (merce+spedizione) {ll:.2f} € · margine Kalab prima della quota {M+Q:.2f} €")
+        print(f"{c['nome'][:46]:46} {r['prezzo']:7.2f} {r['quota']:7.2f} {r['margine']:7.2f} {r['pct']:5.0%}  {c['mix']:.0%}")
+    S, Q, M, N = medie(quota, base)
+    print(f"{'MEDIA PESATA (ordine medio)':46} {S:7.2f} {Q:7.2f} {M:7.2f} {M/S:5.0%}   netto medio {N:.2f}")
     for nome in ("prudente", "medio", "ambizioso"):
-        s = scenario(nome, quota, base)
-        print(f"\n-- {nome.upper()} --  ordini 12m {s['ordini12']}  36m {s['ordini36']} | incasso 12m {s['incasso12']:,.0f} €  36m {s['incasso36']:,.0f} €")
-        print(f"   B2Brand: quota 12m {s['quota12']:,.0f}  36m {s['quota36']:,.0f} | costi 12m {s['costi12']:,.0f}  36m {s['costi36']:,.0f} | risultato 12m {s['ris12']:,.0f}  36m {s['ris36']:,.0f} | rientro mese {s['rientro']} | esposizione max {s['esposizione']:,.0f}")
-        print(f"   Kalab: margine 12m {s['margk12']:,.0f}  36m {s['margk36']:,.0f}")
-        k = scenario(nome, quota, base, solo_cassa=True)
-        ore = s['ore36']
-        print(f"   SOLO CASSA: costi vivi 12m {k['costi12']:,.0f}  36m {k['costi36']:,.0f} | risultato di cassa 12m {k['ris12']:,.0f}  36m {k['ris36']:,.0f} | rientro mese {k['rientro']} | esposizione {k['esposizione']:,.0f} | ore B2Brand 36m {ore:,.0f} → {(k['ris36']/ore if ore else 0):,.1f} €/ora")
+        p = SCENARI[nome]; s = scenario(nome, quota, base, obiettivo)
+        need = [ordini_per_obiettivo(quota, base, obiettivo, p[f"adv{a}"], a) for a in (1, 2, 3)]
+        need_ore = [ordini_per_obiettivo(quota, base, obiettivo, p[f"adv{a}"], a, True) for a in (1, 2, 3)]
+        print(f"\n-- {nome.upper()} -- ordini/mese a regime {p['ordini1']}/{p['ordini2']}/{p['ordini3']} (anno 1/2/3)")
+        print(f"   ordini/anno {s['ordini']} · incasso/anno {[round(x) for x in s['incasso']]}")
+        print(f"   B2Brand quota/anno {[round(x) for x in s['quota']]} · netto di CASSA/anno {[round(x) for x in s['netto_cassa']]} · media mese {[round(x/12) for x in s['netto_cassa']]}")
+        print(f"   B2Brand netto a costo pieno (ore a 35 €) /anno {[round(x) for x in s['netto_pieno']]} · ore/anno {[round(x) for x in s['ore']]}")
+        print(f"   primo mese con ≥ {obiettivo} € di cassa: {s['primo_obiettivo']} · rientro cassa mese {s['rientro_cassa']} · rientro pieno mese {s['rientro_pieno']} · esposizione {s['esposizione']:,.0f}")
+        print(f"   ordini/mese per {obiettivo} € di cassa: {[round(x) for x in need]} · con le ore pagate: {[round(x) for x in need_ore]}")
+        print(f"   Kalab margine/anno {[round(x) for x in s['marg_k']]}")
+    h = corsa_hub()
+    print(f"\n== CORSA ALL'HUB (andata e ritorno Scalea-Battipaglia) ==")
+    print(f"   {h['km']} km, {h['euro']:.0f} € (carburante + usura), {h['ore']:.1f} ore · al mese: {h['euro_mese']:,.0f} € e {h['ore_mese']:.0f} ore · con il tempo a {CORSA_HUB['valore_ora']:.0f} €/h: {h['euro_mese_con_tempo']:,.0f} €")
+    print(f"   {'ordini/mese':>12} {'corsa €/ordine':>15} {'con tempo':>10} {'3PL €/ordine':>13}")
+    for o in (50, 100, 150, 300, 600, 1000):
+        print(f"   {o:12} {h['euro_mese']/o:15.2f} {h['euro_mese_con_tempo']/o:10.2f} {tre_pl_per_ordine(o):13.2f}")

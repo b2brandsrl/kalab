@@ -1,35 +1,37 @@
 # -*- coding: utf-8 -*-
-"""Ipotesi del modello Kalab. Ogni voce dice da dove viene (fonte nel report) o se è STIMA.
+"""Ipotesi del modello Kalab (aggiornate il 04/10/2026: costi veri di Luciano, catalogo solo non deperibile, 50% sul netto, obiettivo 1.000 €/mese).
+Ipotesi del modello Kalab. Ogni voce dice da dove viene (fonte nel report) o se è STIMA.
 Le righe sono «ordini tipo» per categoria: il prezzo è lo scontrino medio di quell'ordine (IVA inclusa,
 spedizione esclusa), il costo è quello della merce dentro l'ordine."""
 
 CATEGORIE = [
-    dict(nome="Polveri e secco (4 vasetti 12-15 g o 2 + sacchetti)", prezzo=28.0, iva=0.10, costo=4.2, imballo=0.8,
-         sped_cliente=5.90, sped_vera=7.00, comm_pct=0.02, comm_fix=0.25, resi=0.01, mix=0.25,
-         fonte="Prezzi: Peperita 12 g 4,95-11,50 €, calabresi 50-100 g 3,50-6 € (ricerca 02/04). Costo STIMA ~0,9 €/vasetto (04 §5.2). Spedizione: secco 1 kg Italia 6-11 € a listino, 7 € con tariffa negoziata (03)."),
-    dict(nome="Salse e creme (3 vasetti 90-130 g)", prezzo=24.0, iva=0.10, costo=6.8, imballo=1.2,
-         sped_cliente=5.90, sped_vera=7.50, comm_pct=0.02, comm_fix=0.25, resi=0.02, mix=0.20,
-         fonte="Prezzi: Kalab oggi 7,50 €/crema; mercato 4,50-7 € (02). Costo STIMA 1,8-2,3 €/vasetto (04)."),
-    dict(nome="Sott'olio e conserve (2 vasetti + 1 crema)", prezzo=24.0, iva=0.10, costo=9.0, imballo=1.5,
+    dict(nome="Polveri e secco (4 vasetti 12-15 g o 2 + sacchetti)", prezzo=28.0, iva=0.10, costo=4.0, imballo=0.8,
+         sped_cliente=5.90, sped_vera=7.00, comm_pct=0.02, comm_fix=0.25, resi=0.01, mix=0.30,
+         fonte="Prezzi: Peperita 12 g 4,95-11,50 €, calabresi 50-100 g 3,50-6 € (ricerca 02/04). Costo STIMA ~1 €/vasetto, in linea col dato di Luciano sulle creme (04/10). Spedizione: secco 1 kg Italia 6-11 € a listino, 7 € con tariffa negoziata (03)."),
+    dict(nome="Creme e salse (3 vasetti a 7,50 €)", prezzo=22.5, iva=0.10, costo=3.0, imballo=1.2,
+         sped_cliente=5.90, sped_vera=7.50, comm_pct=0.02, comm_fix=0.25, resi=0.02, mix=0.35,
+         fonte="DATO KALAB: prezzo 7,50 €/crema (kalab.it); costo ~1 €/vasetto (Luciano, riferito da Davide il 04/10/2026)."),
+    dict(nome="Sott'olio e conserve (2 vasetti + 1 crema)", prezzo=24.0, iva=0.10, costo=4.0, imballo=1.5,
          sped_cliente=5.90, sped_vera=8.00, comm_pct=0.02, comm_fix=0.25, resi=0.02, mix=0.10,
-         fonte="Prezzi 4,49-9 € a vasetto (02). Costo STIMA 2,6-3,5 € (04). Vetro pesante (1,5-2 kg): spedizione 8 € (03)."),
+         fonte="Prezzi 4,49-9 € a vasetto (02). Costo STIMA 1,5 €/vasetto (più olio delle creme; da chiedere a Luciano). Vetro pesante (1,5-2 kg): spedizione 8 € (03)."),
     dict(nome="Semi (4 bustine)", prezzo=14.0, iva=0.10, costo=1.6, imballo=0.3,
-         sped_cliente=2.90, sped_vera=3.00, comm_pct=0.02, comm_fix=0.25, resi=0.01, mix=0.15,
+         sped_cliente=2.90, sped_vera=3.00, comm_pct=0.02, comm_fix=0.25, resi=0.01, mix=0.0,
          fonte="Prezzi 1-5 €/bustina (02); costo STIMA 0,35 € (04). Plico postale. ATTENZIONE: vincolo legge sementiera (04 §4)."),
     dict(nome="Piantine (5 vasi, solo marzo-giugno)", prezzo=25.0, iva=0.10, costo=10.0, imballo=2.5,
-         sped_cliente=8.90, sped_vera=9.50, comm_pct=0.02, comm_fix=0.25, resi=0.08, mix=0.05,
+         sped_cliente=8.90, sped_vera=9.50, comm_pct=0.02, comm_fix=0.25, resi=0.08, mix=0.0,
          fonte="Prezzi 2,70-5 €/vaso (02); costo STIMA 1,5-2 € (04). Serve RUOP + passaporto piante. Resi alti: viva."),
-    dict(nome="Kit degustazione / box regalo", prezzo=38.0, iva=0.10, costo=10.0, imballo=2.0,
-         sped_cliente=5.90, sped_vera=7.00, comm_pct=0.02, comm_fix=0.25, resi=0.02, mix=0.20,
-         fonte="Prezzi 25-45 € (02/04); costo STIMA 5-12 € (04). Picco nov-dic."),
+    dict(nome="Kit degustazione / box regalo", prezzo=38.0, iva=0.10, costo=6.0, imballo=2.0,
+         sped_cliente=5.90, sped_vera=7.00, comm_pct=0.02, comm_fix=0.25, resi=0.02, mix=0.25,
+         fonte="Prezzi 25-45 € (02/04); costo STIMA 5 vasetti a ~1 € + astuccio. Picco nov-dic."),
     dict(nome="Fresco 1 kg isotermico, solo Italia 24 h", prezzo=20.0, iva=0.04, costo=4.5, imballo=4.0,
-         sped_cliente=9.90, sped_vera=15.00, comm_pct=0.02, comm_fix=0.25, resi=0.10, mix=0.05,
+         sped_cliente=9.90, sped_vera=15.00, comm_pct=0.02, comm_fix=0.25, resi=0.10, mix=0.0,
          fonte="Prezzi 12-24 €/kg varietà nominate (02). Costo STIMA; imballo isotermico+gel STIMA 3-5 €; espresso 24 h 12-18 € negoziato (03 §costo a pacco: 17-25 € tutto compreso). Resi 10% = esperienza Natale scorso."),
 ]
 
 ACCORDI = dict(
     quota_base=0.50,
-    base="lordo",
+    base="netto",
+    obiettivo_mese=1000,
     alternative=[
         dict(nome="50% dell'incasso lordo (proposta di Kalab)", base="lordo", quota=0.50, commento="Quota su merce + spedizione incassata, IVA inclusa: la lettura letterale di «50% dell'incasso»."),
         dict(nome="50% dell'incassato netto (senza IVA, spedizione e commissioni)", base="netto", quota=0.50, commento="Stessa percentuale, base più piccola: è la prassi del settore (07 B1e)."),
@@ -81,23 +83,37 @@ STAGIONE = dict(
 )
 
 NOTE_LEGGIMI = [
-    "Scenari Kalab × B2Brand — come usare questo foglio",
+    "Scenari Kalab × B2Brand — come usare questo foglio (aggiornato il 04/10/2026)",
     "",
     "Le celle AZZURRE sono ipotesi: cambiale e tutto il resto si ricalcola. Le celle VERDI sono i risultati da guardare.",
     "",
+    "Cosa è cambiato il 04/10: costo vero delle creme (~1 € a vasetto, da Luciano); catalogo solo non deperibile (polveri, secco, creme, sott'olio, kit e box: semi, piantine e fresco a mix zero); accordo 50% calcolato sulla merce netta; obiettivo di B2Brand 1.000 € di cassa al mese; nuovo foglio Logistica.",
+    "",
     "Fogli:",
-    "• Ipotesi — un «ordine tipo» per categoria di prodotto: prezzo, IVA, costi, spedizione, commissioni, quota del mix. In fondo: la percentuale di B2Brand e su cosa si calcola («lordo» = merce + spedizione incassata, IVA inclusa; «netto» = merce senza IVA e senza commissioni).",
-    "• Conti per prodotto — per ogni ordine tipo: quanto va a B2Brand, quanto resta a Kalab dopo prodotto, imballo, spedizione e perdite. Colonna O: se è vicina a zero, con quella percentuale Kalab lavora gratis.",
-    "• Costi B2Brand — quello che B2Brand anticipa (una tantum) e spende ogni mese (ore interne comprese).",
-    "• Stagionalità — peso di ogni mese (media = 1). Costruita da Google Trends e dai dati del Natale online (ricerca/08_trends.md, 01_mercato.md).",
-    "• Scenari — tre scenari (prudente, medio, ambizioso) mese per mese per 36 mesi: ordini, incasso, quota B2Brand, costi, cumulato e mese di rientro. Le 7 righe azzurre in alto sono le leve.",
-    "• Confronto accordi — lo stesso ordine medio con percentuali diverse: cosa prende B2Brand e cosa resta a Kalab.",
+    "• Ipotesi — un «ordine tipo» per categoria: prezzo, IVA, costi, spedizione, commissioni, quota del mix. In fondo: percentuale di B2Brand, base di calcolo («netto» = merce senza IVA e senza commissioni, la spedizione passa a Kalab al costo; «lordo» = tutto l'incasso, IVA e spedizione comprese) e obiettivo mensile di B2Brand.",
+    "• Conti per prodotto — per ogni ordine tipo: quanto va a B2Brand e quanto resta a Kalab dopo prodotto, imballo, spedizione e perdite (colonna O).",
+    "• Costi B2Brand — quello che B2Brand anticipa e spende ogni mese, diviso in «cassa» (soldi che escono) e «ore» (tempo interno a 35 €/h).",
+    "• Stagionalità — peso di ogni mese (media = 1), da Google Trends e dai dati del Natale online.",
+    "• Scenari — in alto le leve (ordini, pubblicità) e gli ordini al mese che servono per l'obiettivo; sotto, 36 mesi per scenario con netto di cassa e netto a costo pieno; in fondo il riepilogo (primo mese sopra l'obiettivo, rientro, esposizione).",
+    "• Logistica — quanto costa a ordine la corsa pomeridiana all'hub contro un magazzino conto terzi vicino all'hub.",
+    "• Confronto accordi — lo stesso ordine medio con percentuali e basi diverse.",
     "",
     "Avvertenze:",
-    "• Tutti i numeri di partenza sono STIME dichiarate nel report (REPORT_fattibilita_kalab.md): nessun dato di Kalab è ancora arrivato. Quando arrivano fatturato, costi e volumi veri, si sostituiscono qui.",
-    "• L'IVA è calcolata solo sulla merce (per semplicità); sulla spedizione incassata l'IVA segue il bene. Le aliquote (10% trasformati e semi, 4% fresco) sono da confermare col commercialista.",
-    "• La quota di B2Brand è calcolata senza IVA: se B2Brand fattura «+ IVA 22%» e Kalab è nel regime speciale agricolo, per Kalab quella IVA è un costo in più (vedi report, capitolo 6).",
-    "• Il mese 1 del piano è marzo 2027 (ipotesi: accordo a ottobre-novembre 2026, costruzione 3-4 mesi). Si cambia nel codice (scenari/ipotesi.py, mese_avvio).",
-    "",
-    "Generato da scenari/genera_xlsx.py il 02/10/2026. Per rigenerarlo: python3 scenari/genera_xlsx.py",
+    "• I costi di polveri, sott'olio e kit sono ancora STIME allineate al dato delle creme: vanno chiesti a Luciano.",
+    "• «Netto di cassa» è prima delle tasse di B2Brand. La quota è senza IVA: se Kalab è nel regime speciale agricolo, l'IVA sulla fattura di B2Brand per lui è un costo (report, cap. 7).",
+    "• Il mese 1 del piano è marzo 2027. Si cambia in scenari/ipotesi.py (mese_avvio) e si rigenera con: python3 scenari/genera_xlsx.py",
 ]
+
+
+# Mix a zero = fuori dal catalogo della fase 1 (semi, piantine, fresco): decisione di Davide del 04/10/2026,
+# «prodotti chiaramente vendibili e non deperibili». Restano nel foglio per poterli riaccendere.
+
+# Il viaggio pomeridiano verso un hub (idea di Davide). Fonte distanza: rome2rio, Scalea→Battipaglia
+# 149 km, 1 h 44, carburante 24-35 € a tratta (letto il 04/10/2026). Usura e manutenzione: STIMA.
+CORSA_HUB = dict(km_andata=149, ore_andata=1.75, carburante_andata=30.0, usura_km=0.10,
+                 ore_al_deposito=0.5, giorni_al_mese=22, valore_ora=15.0)
+
+# Magazzino conto terzi (3PL) vicino a un hub: Tissquad 01/04/2026 (picking 0,80-1,50 €, packing
+# 0,50-1,00 €, materiali 0,50-1,00 €, pallet 25-50 €/mese; spedizione 0-2 kg Nord 3,50-5 €).
+TRE_PL = dict(pick_pack=2.0, materiali=0.75, pallet_mese=40.0, pallet_n=2, rifornimento_mese=90.0,
+              spedizione_da_hub=5.0)
