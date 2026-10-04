@@ -114,3 +114,15 @@ CORSA_HUB = dict(km_andata=149, ore_andata=1.75, carburante_andata=30.0, usura_k
 # 0,50-1,00 €, materiali 0,50-1,00 €, pallet 25-50 €/mese; spedizione 0-2 kg Nord 3,50-5 €).
 TRE_PL = dict(pick_pack=2.0, materiali=0.75, pallet_mese=40.0, pallet_n=2, rifornimento_mese=90.0,
               spedizione_da_hub=5.0)
+
+
+# «Ambizioso: cosa serve» — dagli ordini obiettivo ai numeri del sito. Valori PROVVISORI: si aggiornano
+# con ricerca/ambizioso/02_benchmark_e_numeri.md. Ogni voce: (valore anno 1, anno 2, anno 3, nota).
+FUNNEL = dict(
+    conversione=(0.015, 0.020, 0.025, "tasso di conversione del sito (ordini ÷ visite)"),
+    ritorno=(0.20, 0.35, 0.45, "quota degli ordini fatta da clienti che hanno già comprato"),
+    cpc=(0.60, 0.70, 0.80, "costo medio di un clic a pagamento (€)"),
+    cac=(25.0, 25.0, 25.0, "costo pubblicitario per un cliente nuovo (€)"),
+    quota_email=(0.15, 0.25, 0.30, "quota degli ordini che arriva dalla newsletter"),
+    ordini_per_1000_iscritti=(8.0, 8.0, 8.0, "ordini al mese ogni 1.000 iscritti alla newsletter"),
+)

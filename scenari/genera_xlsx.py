@@ -10,7 +10,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-from ipotesi import CATEGORIE, SCENARI, COSTI_B2B, STAGIONE, ACCORDI, NOTE_LEGGIMI, CORSA_HUB, TRE_PL
+from ipotesi import CATEGORIE, SCENARI, COSTI_B2B, STAGIONE, ACCORDI, NOTE_LEGGIMI, CORSA_HUB, TRE_PL, FUNNEL
 
 AZZ = PatternFill("solid", fgColor="DDEBF7")   # ipotesi modificabile
 GRI = PatternFill("solid", fgColor="F2F2F2")   # intestazione
@@ -282,6 +282,50 @@ for k, (o, adv) in enumerate(((50, 300), (100, 400), (150, 400), (200, 500), (30
 we.cell(row=13, column=1, value="Lettura: B2Brand paga pubblicità e piattaforma, che costano uguale con pochi o tanti ordini; Kalab paga prodotto e spedizione, che crescono con gli ordini. Per questo la percentuale fissa che pareggia scende quando i volumi salgono. «Metà del margine» pareggia a ogni volume senza toccare niente.")
 we.column_dimensions["A"].width = 16
 for col in "BCDEFG": we.column_dimensions[col].width = 18
+
+# ---------------------------------------------------------------- Ambizioso: cosa serve
+wf = wb.create_sheet("Ambizioso - cosa serve")
+wf.cell(row=1, column=1, value="Scenario ambizioso: cosa deve succedere ogni mese, a regime, per arrivarci").font = Font(bold=True, size=12)
+wf.cell(row=2, column=1, value="Celle azzurre = valori di riferimento dai benchmark (fonte in ricerca/ambizioso/02_benchmark_e_numeri.md). Ordini e pubblicità arrivano dal foglio Scenari, colonna Ambizioso.")
+for j, h in enumerate(["Voce", "Anno 1", "Anno 2", "Anno 3", "Nota"], 1):
+    c = wf.cell(row=4, column=j, value=h); c.font = B; c.fill = GRI; c.border = BOX
+righe_f = [("conversione", "Tasso di conversione del sito", "0.0%"),
+           ("ritorno", "Ordini da clienti che ritornano", "0%"),
+           ("cpc", "Costo di un clic a pagamento (€)", "0.00"),
+           ("cac", "Costo pubblicitario per un cliente nuovo (€)", "0.00"),
+           ("quota_email", "Quota degli ordini dalla newsletter", "0%"),
+           ("ordini_per_1000_iscritti", "Ordini al mese ogni 1.000 iscritti", "0.0")]
+FR = {}
+for i, (k, lab, fmt) in enumerate(righe_f, 5):
+    wf.cell(row=i, column=1, value=lab).border = BOX
+    for a in range(3):
+        c = wf.cell(row=i, column=2 + a, value=FUNNEL[k][a]); c.fill = AZZ; c.border = BOX; c.number_format = fmt
+    wf.cell(row=i, column=5, value=FUNNEL[k][3])
+    FR[k] = i
+r0 = 5 + len(righe_f) + 1
+calc = [
+    ("Ordini al mese (obiettivo a regime)", lambda col, a: f"=Scenari!$D${2 + a}", "#,##0"),
+    ("Pubblicità al mese (€)", lambda col, a: f"=Scenari!$D${6 + a}", "#,##0"),
+    ("Visite al mese necessarie", lambda col, a: f"=ROUND({col}{r0}/{col}{FR['conversione']},0)", "#,##0"),
+    ("…di cui comprate con la pubblicità", lambda col, a: f"=ROUND({col}{r0+1}/{col}{FR['cpc']},0)", "#,##0"),
+    ("…di cui da portare gratis (Google, social, eventi, passaparola)", lambda col, a: f"=MAX(0,{col}{r0+2}-{col}{r0+3})", "#,##0"),
+    ("Clienti nuovi al mese", lambda col, a: f"=ROUND({col}{r0}*(1-{col}{FR['ritorno']}),0)", "#,##0"),
+    ("…di cui comprati con la pubblicità", lambda col, a: f"=ROUND({col}{r0+1}/{col}{FR['cac']},0)", "#,##0"),
+    ("…di cui da trovare gratis", lambda col, a: f"=MAX(0,{col}{r0+5}-{col}{r0+6})", "#,##0"),
+    ("Ordini di clienti che ritornano", lambda col, a: f"=ROUND({col}{r0}*{col}{FR['ritorno']},0)", "#,##0"),
+    ("Ordini dalla newsletter", lambda col, a: f"=ROUND({col}{r0}*{col}{FR['quota_email']},0)", "#,##0"),
+    ("Iscritti alla newsletter necessari", lambda col, a: f"=ROUND({col}{r0+9}/{col}{FR['ordini_per_1000_iscritti']}*1000,0)", "#,##0"),
+    ("Ordini al giorno", lambda col, a: f"=ROUND({col}{r0}/30,1)", "0.0"),
+]
+for i, (lab, f, fmt) in enumerate(calc):
+    rr = r0 + i
+    wf.cell(row=rr, column=1, value=lab).font = B
+    for a in range(3):
+        col = get_column_letter(2 + a)
+        c = wf.cell(row=rr, column=2 + a, value=f(col, a + 1)); c.fill = VER; c.number_format = fmt; c.border = BOX
+wf.cell(row=r0 + len(calc) + 1, column=1, value="Lettura: la riga «da portare gratis» è il lavoro vero del marchio. Se è troppo alta rispetto a quello che Google, social, eventi e B2B possono dare, l'ambizioso non si raggiunge con quella pubblicità.")
+wf.column_dimensions["A"].width = 58; wf.column_dimensions["E"].width = 60
+for col in "BCD": wf.column_dimensions[col].width = 14
 
 # ---------------------------------------------------------------- Logistica: corsa all'hub vs magazzino conto terzi
 wl = wb.create_sheet("Logistica")

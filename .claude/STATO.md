@@ -31,6 +31,12 @@ Repo: `b2brandsrl/kalab` su GitHub.
   vicino all'hub tra 150 e 300 ordini/mese.
 - Il foglio ha l'interruttore «Modello» (margine/percentuale) nelle Ipotesi e il foglio «Equilibrio».
 
+## In corso (04/10 sera)
+- Davide: video social a parte; B2Brand «incubatore»; se va bene, business online al 50% con Luciano.
+  Chiesta una ricerca mirata a raggiungere lo **scenario ambizioso** (100/250/450 ordini al mese).
+- Sette filoni in parallelo → `ricerca/ambizioso/01..07` (casi di successo, numeri, canali, Europa,
+  prodotti e tendenze, finanziamenti, struttura 50/50). Sintesi prevista: `PIANO_ambizioso_kalab.md`.
+
 ## Da fare
 - Incontro con Luciano: proporre «metà del guadagno» col foglio Equilibrio; listino dei costi di
   prodotto; numeri del Natale scorso; accesso al sito (domande cap. 13). Decidere i video social.
