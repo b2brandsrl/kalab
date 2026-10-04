@@ -1,46 +1,41 @@
 # STATO — kalab
 
-Aggiornato: 04/10/2026 (sera)
+Aggiornato: 04/10/2026 (notte)
 
 ## Cos'è
-Studio di fattibilità per un e-commerce di **Kalab** (KALAB di Luciano Fortunato, Orsomarso/Scalea,
-300+ varietà di peperoncino) gestito da B2Brand a percentuale. Nessun codice: è ricerca.
-Repo: `b2brandsrl/kalab` su GitHub.
+E-commerce di **Kalab** (KALAB di Luciano Fortunato, Orsomarso/Scalea, 300+ varietà di peperoncino):
+B2Brand fa da **incubatore** delle vendite online (sito e digitale con Claude Code, anticipa piattaforma e
+pubblicità), con «metà del guadagno»; se va bene, **business online al 50% con Luciano** (srl).
+Video social fuori dall'accordo. Repo: `b2brandsrl/kalab` su GitHub.
 
 ## Consegnato
-- `REPORT_fattibilita_kalab.md` (pagina semplice + 15 capitoli; aggiornato il 04/10: pag. 1, cap. 4.7
-  nuovo sul viaggio all'hub, 6, 7.2, 11, 12) e `scenari_kalab.xlsx` (8 fogli, nuovo foglio Logistica).
-  Copie in `~/Drive/claude-code-logs/kalab/`.
-- Ricerca in `ricerca/01..08`.
-- Modello: `scenari/ipotesi.py` → `scenari/calcola.py` (stampa) e `scenari/genera_xlsx.py` (Excel).
-  Rigenerare: `python3 scenari/genera_xlsx.py`. Il foglio è stato ricalcolato con pycel e torna
-  identico a calcola.py (04/10).
+- `REPORT_fattibilita_kalab.md`: studio di fattibilità (02/10, aggiornato il 04/10).
+- `PIANO_ambizioso_kalab.md` (04/10): piano per lo scenario ambizioso (100/250/450 ordini al mese),
+  con pagina 1 semplice, KPI per trimestre, prodotti, canali, Europa, logistica, soldi, struttura
+  incubatore → 50/50, calendario di 36 mesi, rischi, domande per Luciano.
+- `scenari_kalab.xlsx` (9 fogli): interruttore «Modello» (margine/percentuale), Equilibrio, Logistica,
+  «Ambizioso - cosa serve»; crescita continua negli anni 2-3. Verificato con pycel = `scenari/calcola.py`.
+- Ricerca: `ricerca/01..08` (primo studio) e `ricerca/ambizioso/01..07` (+ `02_matematica.py`).
+- Copie in `~/Drive/claude-code-logs/kalab/`.
 
 ## Decisioni (04/10, Davide)
-- Costo creme ~1 € a vasetto (Luciano). Polveri e sott'olio: stime allineate, da chiedere.
-- Catalogo fase 1 solo **non deperibile**; le 300 varietà = tirature limitate in polvere + racconto.
-- **Niente ore nei conti**: sito, contenuti, traduzioni li fa Claude Code. Davide al massimo scende per
-  i video social, che NON sono nell'accordo (mai discussi con Luciano).
-- Obiettivo: **equilibrio** fra B2Brand e Kalab, la percentuale può salire o scendere. Proposta:
-  **«metà del guadagno»** (vendite nette − listino costi prodotto − imballo − spedizione non pagata −
-  commissioni − resi − pubblicità − piattaforma, metà a testa; B2Brand anticipa e recupera per prima).
-  Pareggia a ogni volume. Alternativa a scaglioni sulla merce netta: 50% fino a 100 ordini/mese, 42%
-  fino a 250, 39% sopra. Il 50% fisso a 150 ordini dà B2Brand 1.350 €, Kalab 735 €.
-- 1.000 € al mese a testa: ~145 ordini/mese (medio: nov 2028; ambizioso: dic 2027).
-- Corsa quotidiana all'hub: **no** (~2.000 €/mese, 13 €/pacco a 150 ordini); magazzino conto terzi
-  vicino all'hub tra 150 e 300 ordini/mese.
-- Il foglio ha l'interruttore «Modello» (margine/percentuale) nelle Ipotesi e il foglio «Equilibrio».
+- Costo creme ~1 € a vasetto (Luciano). Catalogo fase 1 solo **non deperibile**; 300 varietà come
+  tirature limitate in polvere e racconto.
+- Niente ore nei conti (Claude Code). Obiettivo: **equilibrio** fra i due → «metà del guadagno».
+- Corsa quotidiana all'hub: no; magazzino conto terzi vicino all'hub prima del Natale 2028.
+- Fase 2: srl ordinaria 50/50 «ibrida» quando: ≥200 ordini/mese per 3 mesi (esclusi nov-dic),
+  ≥2.500 €/mese di guadagno, anticipi rientrati + estero o affidabilità. Nell'ambizioso: srl da aprile 2029.
 
-## In corso (04/10 sera)
-- Davide: video social a parte; B2Brand «incubatore»; se va bene, business online al 50% con Luciano.
-  Chiesta una ricerca mirata a raggiungere lo **scenario ambizioso** (100/250/450 ordini al mese).
-- Sette filoni in parallelo → `ricerca/ambizioso/01..07` (casi di successo, numeri, canali, Europa,
-  prodotti e tendenze, finanziamenti, struttura 50/50). Sintesi prevista: `PIANO_ambizioso_kalab.md`.
+## Urgenze scoperte il 04/10
+- **Dominio kalab.it scade il 23/10/2026** (Aruba, intestato a KALAB di Luciano Fortunato, Loc. Petrosa, Scalea).
+- **AI Lab Cosenza** (Camera di commercio + Unical): domanda entro il **12/10/2026 ore 12**.
+- **Marchio KALAB**: registrato UIBM n. 2023000146190 (logo), solo classi 29 e 31: manca la 30
+  (spezie, salse, miele) e l'UE. Valutare CHIKALAB (WIPO 1740294, classi 29-30). Consulente in marchi.
+- **IGP su creme e miele**: notifica al Consorzio entro novembre 2026 (fino a 4 mesi).
+- **IVA**: resta il 22% non detraibile anche nell'associazione in partecipazione (Ris. 192/E/2008).
 
 ## Da fare
-- Incontro con Luciano: proporre «metà del guadagno» col foglio Equilibrio; listino dei costi di
-  prodotto; numeri del Natale scorso; accesso al sito (domande cap. 13). Decidere i video social.
-- Commercialista: associazione in partecipazione e IVA sulla quota di utili (cap. 7.3).
-- Preventivi corrieri con la domanda sul deposito campano (cap. 4.7).
-- Davide: Keyword Planner e Meta Ads Manager in lettura (cap. 14).
-- Avvocato e commercialista: cap. 7.
+- Davide: incontro con Luciano (report cap. 13 + piano cap. 11); accordo d'immagine con Francavilla.
+- Commercialista, notaio, avvocato: le 35 domande in `ricerca/ambizioso/07` (chiusura).
+- Davide: Keyword Planner e Meta Ads in lettura; creator del piccante da verificare a mano.
+- Preventivi corrieri con la domanda sul deposito campano (report cap. 4.7).
