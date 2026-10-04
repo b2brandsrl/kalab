@@ -2,7 +2,9 @@
 
 Ricerca del 2 ottobre 2026, **aggiornata il 4 ottobre 2026** con tre informazioni di Davide: le creme
 costano a Luciano circa 1 € a vasetto; il catalogo è solo di prodotti non deperibili; l'obiettivo di
-B2Brand è 1.000 € netti al mese. Aggiornati: pagina 1, cap. 4.7 (nuovo), 6, 7.2, 11, 12. B2Brand. Solo fonti pubbliche e gratuite: nessun contatto, nessun preventivo,
+B2Brand è 1.000 € netti al mese. Poi, lo stesso giorno: le ore di B2Brand escono dai conti (sito e
+contenuti li costruisce Claude Code) e l'obiettivo diventa l'equilibrio fra quello che prendono B2Brand e
+Kalab, qualunque sia la percentuale. Aggiornati: pagina 1, cap. 4.7 (nuovo), 6, 7, 11, 12. B2Brand. Solo fonti pubbliche e gratuite: nessun contatto, nessun preventivo,
 nessuna spesa. I dettagli e tutte le fonti numerate stanno negli otto file della cartella `ricerca/`
 (richiamati qui come «01», «02»... «08»). Il modello dei numeri è in `scenari_kalab.xlsx`
 (celle azzurre = ipotesi modificabili).
@@ -17,25 +19,27 @@ come dato.
 
 ### Il verdetto (aggiornato il 04/10)
 
-**Sì, e il 50% proposto da Luciano può restare, a una condizione: si calcola sulla merce venduta,
-senza IVA, non su tutto l'incasso.** Con le creme a 1 € a vasetto, il 50% della merce netta dà a
-B2Brand circa 12 € a ordine e lascia a Kalab circa 5 €. Il 50% di tutto l'incasso, invece, si prende
-anche l'IVA e la spedizione: a Kalab restano 20 centesimi a ordine, anche con costi così bassi. Il costo
-basso aiuta molto, ma la differenza vera la fa su cosa si calcola la percentuale.
+**Conviene, e l'accordo più giusto è «metà del guadagno» invece di «metà dell'incasso».** Su ogni
+ordine, tolti prodotto, imballo, spedizione e commissioni, restano circa 17 € da dividere. B2Brand paga
+pubblicità e piattaforma, Kalab paga prodotto e spedizione: se si divide a metà quello che resta dopo
+tutti questi costi, i due prendono sempre la stessa cifra, con 50 ordini al mese come con 500.
 
-**I 1.000 € al mese per B2Brand arrivano con circa 120-160 ordini al mese**: 4-5 al giorno, circa
-4.000 € di vendite al mese. Nello scenario medio ci si arriva nel secondo anno (novembre 2028),
-nell'ambizioso alla fine del primo (novembre 2027). La pubblicità da sola ne porta 10-17 al mese: il
-resto deve venire dal marchio (clienti che ricomprano, Google, bar e ristoranti, gare, Festival).
+**Una percentuale fissa, invece, è giusta solo a un certo volume.** Quella che pareggia scende quando
+gli ordini salgono: 51% della merce netta a 50 ordini al mese, 42% a 150, 39% a 500. Il 50% di Luciano è
+giusto all'inizio; a 150 ordini al mese darebbe a B2Brand 1.350 € e a Kalab 735 €.
+
+**1.000 € al mese a testa arrivano con circa 145 ordini al mese**: 5 al giorno, circa 4.100 € di vendite
+al mese. Nello scenario medio ci si arriva a novembre 2028, nell'ambizioso a dicembre 2027. B2Brand
+mette pochi soldi veri (500 € di avvio, 100-150 € al mese di piattaforma) e anticipa la pubblicità, che
+si riprende per prima dai mesi buoni. Kalab non mette mai soldi di tasca.
 
 **Il viaggio di ogni pomeriggio verso un hub non conviene per prodotti che durano mesi.** Scalea-Battipaglia
-e ritorno sono circa 300 km, 90 € e 4 ore: ogni giorno fanno circa 2.000 € e 88 ore al mese. Con 150
-ordini al mese sono 13 € a pacco, più di quanto B2Brand guadagna su quel pacco. L'idea dell'hub è giusta,
-ma si fa **una volta al mese portando la merce in un magazzino vicino all'hub**, non ogni giorno coi pacchi.
+e ritorno sono circa 300 km, 90 € e 4 ore: ogni giorno fanno circa 2.000 € e 88 ore al mese, 13 € a
+pacco con 150 ordini. L'hub fatto bene è un magazzino conto terzi lì vicino, rifornito una volta al mese.
 
 **Le 300 varietà** non si vendono fresche, ma possono vivere in forma non deperibile: polveri e secco
-monovarietali in vasetto, a tiratura limitata («la varietà del mese»). È esattamente così che i
-concorrenti premium vendono le varietà a 400-950 €/kg (cap. 3).
+monovarietali in vasetto, a tiratura limitata («la varietà del mese»). È così che i concorrenti premium
+vendono le varietà a 400-950 €/kg (cap. 3).
 
 ### Le cose che il brief non sapeva
 
@@ -61,13 +65,11 @@ concorrenti premium vendono le varietà a 400-950 €/kg (cap. 3).
 |---|---|---|---|
 | Costo di una crema per Kalab | circa 1 € a vasetto | DATO Kalab (Luciano, riferito da Davide il 04/10) | cap. 6 |
 | Ordine medio online (merce, IVA inclusa) | 28 € | STIMA su prezzi Kalab e di mercato | cap. 6 |
-| 50% della merce netta: a B2Brand / a Kalab, per ordine | 12,30 € / 4,90 € | STIMA | cap. 6 |
-| 50% di tutto l'incasso: a Kalab, per ordine | 0,20 € | STIMA | cap. 6 |
-| Ordini al mese per 1.000 € di cassa a B2Brand | 120-160 | STIMA | cap. 11 |
-| Gli stessi, se si pagano anche le ore di B2Brand a 35 €/h | 200-260 | STIMA | cap. 11 |
-| Ore di lavoro di B2Brand al mese | 35-40 | STIMA | cap. 7 |
-| Soldi veri che B2Brand anticipa | 3.000 € all'inizio + 100 €/mese, più la pubblicità | STIMA | cap. 7 |
-| Massimo che B2Brand ha «fuori» in cassa, prima di rientrare | 3.700-5.500 € | STIMA | cap. 11 |
+| Margine da dividere per ordine | 17,24 € | STIMA | cap. 6 |
+| Percentuale della merce netta che pareggia, a 50 / 150 / 500 ordini al mese | 51% / 42% / 39% | STIMA | cap. 6.4 |
+| Ordini al mese per 1.000 € a testa | circa 145 (con 400 € di pubblicità) | STIMA | cap. 11 |
+| Soldi veri di B2Brand | 500 € di avvio + 100-150 €/mese, più la pubblicità anticipata | STIMA | cap. 7 |
+| Massimo che B2Brand ha «fuori», prima di rientrare | 850-2.100 € | STIMA | cap. 11 |
 | Corsa Scalea-Battipaglia e ritorno | 298 km, circa 90 €, circa 4 ore | DATO rome2rio + STIMA usura | cap. 4.7 |
 | Corsa ogni giorno, costo per pacco con 150 ordini al mese | 13 € | STIMA | cap. 4.7 |
 | Magazzino conto terzi vicino all'hub, con 150 ordini al mese | 3,90 € a pacco (0,30 € netti dopo il risparmio di spedizione) | DATO Tissquad + STIMA | cap. 4.7 |
@@ -76,33 +78,31 @@ concorrenti premium vendono le varietà a 400-950 €/kg (cap. 3).
 
 ### I rischi
 
-1. **I volumi.** 1.000 € al mese vogliono 4-5 ordini al giorno, ogni giorno. Il primo anno, nello
-   scenario medio, si sta sui 40 al mese e B2Brand mette soldi (fino a circa 4.400 € di cassa).
-2. **Lo squilibrio per ordine.** B2Brand prende 12 €, Kalab 5 €, perché imballo e parte della
-   spedizione li paga solo lui. Se tra un anno Luciano fa il conto, l'accordo scricchiola. Rimedio
-   semplice: far pagare al cliente la spedizione vera, o spedizione gratis sopra 49 € con i prezzi che
-   la contengono. Così Kalab sale a circa 6,30 € a ordine.
-3. **La trappola IVA.** Kalab è quasi certamente nel regime speciale agricolo e non detrae l'IVA sulla
-   fattura di B2Brand: «50% + IVA» per lui vale il 61% (cap. 7).
-4. **Lo stock.** Oggi metà del catalogo di kalab.it è «non disponibile». Pubblicità su prodotti
-   esauriti è denaro di B2Brand buttato.
-5. **L'impresa individuale.** Kalab è una persona. Senza clausole di uscita e accesso ai dati, l'anticipo
-   di B2Brand è un regalo.
+1. **I volumi.** 1.000 € a testa vogliono 5 ordini al giorno, ogni giorno. Il primo anno, nello scenario
+   medio, si sta sui 40 al mese e si guadagnano 80 € al mese a testa.
+2. **Se le cose vanno piano, Kalab il primo anno non guadagna.** Con «metà del margine» B2Brand si
+   riprende per prima quello che ha anticipato: nello scenario prudente Kalab rientra solo dei costi del
+   prodotto per tutto il primo anno. Va detto a Luciano prima, non dopo.
+3. **La pubblicità la pagano in due.** Con «metà del margine» ogni euro di pubblicità toglie 50 centesimi
+   a Kalab: il budget va deciso insieme, ogni trimestre.
+4. **La trappola IVA.** Con una fattura di servizi, Kalab (regime speciale agricolo) non detrae l'IVA di
+   B2Brand: è un 22% in più che nessuno dei due incassa. Con un'associazione in partecipazione potrebbe
+   non esserci: da chiedere al commercialista (cap. 7).
+5. **Lo stock e l'impresa individuale.** Oggi metà del catalogo di kalab.it è «non disponibile», e Kalab
+   è una persona: servono stock minimo scritto, clausole di uscita e accesso ai dati.
 
 ### Le prime mosse
 
-1. **Incontro con Luciano.** Confermare il 50% scritto così: «50% del valore della merce venduta online,
-   senza IVA, senza spedizione e senza commissioni di pagamento», con un ordine d'esempio sul foglio.
-   Chiedere il costo vero di polveri e sott'olio, i numeri del Natale scorso, l'accesso al sito.
+1. **Incontro con Luciano.** Proporre «metà del guadagno» con il foglio Equilibrio aperto e un ordine
+   d'esempio; concordare il listino dei costi di ogni prodotto (le creme a 1 €; polveri e sott'olio da
+   chiedere); i numeri del Natale scorso; l'accesso al sito.
 2. **Catalogo della fase 1.** 30-40 prodotti non deperibili: creme, polveri e secco monovarietali, kit
-   in scala di piccantezza, box regalo. Le 300 varietà entrano come tirature limitate e come schede
-   racconto sul sito. Fresco, piantine e semi in una fase 2.
-3. **Spedizioni.** Si parte col ritiro del corriere in azienda: al Nord in 48 ore, va bene per prodotti
-   che durano mesi. Ai preventivi (GLS, BRT, Poste) si chiede anche: «se porto io i pacchi al vostro
-   deposito di Battipaglia o Salerno, partono come Campania?». Tra 150 e 300 ordini al mese si passa a
-   un magazzino conto terzi vicino all'hub.
-4. **Avvocato e commercialista** con la scaletta del cap. 7 prima di firmare.
-5. **Keyword Planner e Meta Ads** con Davide al computer (cap. 14).
+   in scala di piccantezza, box regalo. Le 300 varietà come tirature limitate e schede racconto.
+3. **Video social.** Non sono nell'accordo e non se n'è mai parlato: decidere se sono compresi o a parte.
+4. **Spedizioni.** Ritiro del corriere in azienda; ai preventivi chiedere anche se un pacco portato al
+   deposito di Battipaglia o Salerno parte come Campania. Magazzino conto terzi tra 150 e 300 ordini.
+5. **Commercialista e avvocato**: forma del contratto e IVA (cap. 7), prima di firmare.
+6. **Keyword Planner e Meta Ads** con Davide al computer (cap. 14).
 
 ---
 
@@ -333,8 +333,8 @@ rifornimento al mese da 90 €, spedizione dall'hub 5 € contro i circa 7,30 �
 
 **Lettura.**
 - La corsa costa uguale con 2 o con 30 pacchi: pesa poco solo quando i pacchi sono tanti. Con 150 ordini
-  al mese sono 13 € a pacco: più della quota di B2Brand (12,30 €) e quasi tre volte quello che resta a
-  Kalab (4,90 €). Diventa ragionevole verso i 1.000 ordini al mese.
+  al mese sono 13 € a pacco: tre quarti dei 17 € che B2Brand e Kalab hanno da dividere su quel pacco.
+  Diventa ragionevole verso i 1.000 ordini al mese.
 - Per prodotti che durano mesi, arrivare in 24 ore invece che in 48 conta poco: conta che il pacco parta
   sempre entro un giorno, sia tracciato e arrivi intatto.
 - **L'hub fatto bene è il magazzino conto terzi**: una corsa al mese col bancale invece di 22 coi pacchi.
@@ -469,7 +469,8 @@ Con lo stesso ordine medio e accordi diversi:
 
 **Lettura.**
 - Il costo di 1 € a vasetto cambia il quadro: con le stime del 02/10 (circa 2 € a vasetto) al 50% della
-  merce netta a Kalab restavano 1,70 € a ordine, ora 4,90 €. **Il 50% regge, se è sulla merce netta.**
+  merce netta a Kalab restavano 1,70 € a ordine, ora 4,90 €. Ma per ordine B2Brand prende 2,5 volte
+  Kalab: il conto giusto non è per ordine, è sul mese (cap. 6.4).
 - Il 50% di tutto l'incasso non regge nemmeno con costi bassissimi: B2Brand si prenderebbe metà dell'IVA
   (che Kalab deve versare) e metà della spedizione (che Kalab paga al corriere).
 - I 4,90 € di Kalab sono dopo aver pagato imballo (circa 1,30 €) e la differenza fra spedizione vera
@@ -487,58 +488,92 @@ Con lo stesso ordine medio e accordi diversi:
 | Accelerator | compra la merce e la rivende | Pattern |
 
 Nessuno di questi anticipa sito, foto, testi e pubblicità a proprio rischio: è questo che il 50%
-«compra», ed è Luciano ad averlo proposto. Il mercato dice che è alto; i conti dicono che sulla merce
-netta Kalab ci sta dentro. Per proteggere l'accordo nel tempo conviene scrivere fin da ora una
-**revisione a soglia** (es. sopra 100.000 € l'anno di merce netta si scende al 40%) e un **10% sugli
-ordini B2B** passati dal sito, che hanno volumi alti e margini bassi.
+«compra», ed è Luciano ad averlo proposto. Ma qui non c'è un'agenzia pagata da un cliente: ci sono due
+soci che dividono un guadagno. Per questo il riferimento giusto non è la tabella qui sopra, è
+l'equilibrio fra i due (cap. 6.4).
+
+### 6.4 L'equilibrio fra B2Brand e Kalab (aggiunto il 04/10/2026)
+
+**Chi paga cosa.** B2Brand paga pubblicità e piattaforma: costano uguale con 50 o con 500 ordini.
+Kalab paga prodotto, imballo e spedizione: crescono con gli ordini. Su ogni ordine medio restano
+**17,24 € da dividere** (merce netta 24,68 € meno prodotto, imballo, spedizione non pagata dal cliente,
+commissioni e perdite). Ore di lavoro escluse da entrambe le parti: il sito lo fa Claude Code, i pacchi
+li fa Luciano.
+
+**La percentuale fissa che pareggia cambia con i volumi** (foglio «Equilibrio»):
+
+| Ordini al mese | Pubblicità | % della merce netta che pareggia | € a testa al mese | Col 50% fisso: B2Brand / Kalab |
+|---|---|---|---|---|
+| 50 | 300 € | 51% | 231 € | 217 € / 245 € |
+| 100 | 400 € | 45% | 612 € | 734 € / 490 € |
+| 150 | 400 € | 42% | 1.043 € | 1.351 € / 735 € |
+| 200 | 500 € | 41% | 1.424 € | 1.868 € / 980 € |
+| 300 | 600 € | 40% | 2.236 € | 3.002 € / 1.471 € |
+| 500 | 800 € | 39% | 3.861 € | 5.271 € / 2.451 € |
+
+**Lettura.** Il 50% di Luciano è giusto all'inizio, quando gli ordini sono pochi e la pubblicità pesa.
+Appena il negozio cresce, il 50% fisso dà a B2Brand quasi il doppio di Kalab.
+
+**Due modi per restare in equilibrio:**
+
+- **A. Metà del guadagno (consigliato).** Ogni mese: vendite nette, meno il costo di ogni prodotto da un
+  listino concordato (la crema a 1 €), meno imballo, spedizione non pagata dal cliente, commissioni,
+  resi, pubblicità e piattaforma. Quello che resta, metà a testa. B2Brand anticipa pubblicità e
+  piattaforma e, se un mese non basta, se li riprende per prima nei mesi dopo. Kalab non mette mai soldi
+  di tasca. Pareggia a ogni volume senza rinegoziare. Richiede un report mensile e il budget pubblicitario
+  deciso insieme. È quasi la definizione dell'associazione in partecipazione (art. 2549 c.c.: una quota
+  degli utili in cambio di un apporto; rendiconto per legge, art. 2552).
+- **B. Percentuale a scaglioni sulla merce netta.** 50% fino a 100 ordini al mese, 42% da 100 a 250,
+  39% sopra. Più semplice da leggere, ma pareggia solo in media e la pubblicità resta tutta a B2Brand.
 
 ---
 
 ## 7. Il rischio di B2Brand e l'accordo
 
-### 7.1 Quanto anticipa B2Brand (foglio «Costi B2Brand», STIMA; benchmark in 07 §B2)
+### 7.1 Quanto mette B2Brand (aggiornato il 04/10/2026)
 
-| Voce | Una tantum | Al mese (anno 1 → 3) | Tipo |
+Decisione di Davide: sito, schede, testi, traduzioni e gestione li fa **Claude Code**; le ore di B2Brand
+non entrano nei conti. Davide al massimo scende in azienda per i video social, che **non sono
+nell'accordo** (mai discussi: da decidere se compresi o a parte).
+
+| Voce | Una tantum | Al mese | Fonte |
 |---|---|---|---|
-| Costruzione negozio (Shopify/Woo, tema, app, feed Merchant): 85 ore | 3.000 € | — | ore |
-| Foto: 60-80 referenze + ambiente | 1.500 € | — | cassa |
-| Testi: schede prodotto + 50 schede varietà | 1.000 € | — | ore |
-| Traduzioni EN + DE (DeepL + revisione) | 1.500 € | — | cassa |
-| Piattaforma, app, dominio | — | 100 → 150 € | cassa |
-| Gestione: ordini, assistenza, contenuti, newsletter, campagne (20-30 ore) | — | 700 → 1.100 € | ore |
-| Manutenzione | — | 50 € | ore |
-| Schede varietà nuove (SEO) | — | 200 → 150 € | ore |
-| **Totale** | **7.000 €** | **1.050 → 1.450 €** | |
-| di cui soldi vivi | 3.000 € | 100 → 150 € | |
-| Pubblicità (a parte, pagata da B2Brand) | — | 300-500 € anno 1 | cassa |
+| Avvio: tema, dominio, app, campioni e prove di spedizione | 500 € | — | STIMA |
+| Foto prodotto | 0 € | — | durante la visita di Davide per i video (da decidere) |
+| Piattaforma, app, dominio | — | 100 → 150 € | Shopify Basic 27 €/mese + app (07 §B2) |
+| Pubblicità | — | 300-1.500 € secondo lo scenario | anticipata da B2Brand; con «metà del guadagno» la pagano in due |
 
-Primo anno a costo pieno: ~19.600 € senza pubblicità, 23.000-25.600 € con. Soldi vivi: 4.800-10.200 €.
-Il mercato chiede 3.000-20.000 € per un sito del genere e 32-38 k€/anno per un e-commerce manager (07).
+Prima di questa decisione il primo anno valeva circa 19.600 € a costo pieno (ore a 35 €/h): resta come
+riferimento di quanto vale il lavoro che fa Claude Code, non come costo.
 
-### 7.2 Quando rientra (dal modello, cap. 11; 50% della merce netta)
+### 7.2 Quando rientra (dal modello, cap. 11; «metà del guadagno»)
 
-| Scenario | Netto di cassa B2Brand anno 1 / 2 / 3 | Media al mese nel terzo anno | Rientro dei soldi anticipati | Contando anche le ore a 35 €/h, in 3 anni |
-|---|---|---|---|---|
-| Prudente | −5.400 € / +900 € / +3.500 € | 290 € | oltre 36 mesi | −45.800 € |
-| Medio | −2.900 € / +9.100 € / +18.200 € | 1.520 € | mese 19 (settembre 2028) | −20.400 € |
-| Ambizioso | +1.900 € / +23.600 € / +46.900 € | 3.900 € | mese 10 (dicembre 2027) | +27.600 € (rientro al mese 26) |
+| Scenario | Rientro di quello che B2Brand ha anticipato | Massimo «fuori» | B2Brand al mese, anno 1 / 2 / 3 |
+|---|---|---|---|
+| Prudente | mese 22 (dicembre 2028) | 2.100 € | −160 € / 215 € / 290 € |
+| Medio | mese 9 (novembre 2027) | 1.380 € | 80 € / 675 € / 1.250 € |
+| Ambizioso | mese 6 (agosto 2027) | 855 € | 380 € / 1.600 € / 3.060 € |
 
-Ore di B2Brand: circa 440 il primo anno, 400-450 negli anni dopo, cioè 35-40 al mese. **Lettura**: il
-rischio di cassa è piccolo (al massimo 3.700-5.500 € fuori); il rischio vero è il tempo. Nello scenario
-medio, nel terzo anno, 1.520 € al mese per circa 37 ore sono circa 40 € l'ora; nel primo anno il tempo è
-un investimento.
+Senza le ore, il rischio di B2Brand è piccolo: al massimo un paio di migliaia di euro, quasi tutti di
+pubblicità.
 
 ### 7.3 Punti per avvocato e commercialista (07 §B3, scaletta completa nel file)
 
-1. **Forma**: contratto di servizi a corrispettivo variabile (fattura mensile con IVA, nessuna ritenuta
-   fra imprese), con rendiconto e audit presi dall'associazione in partecipazione (art. 2552 c.c.).
-   L'agenzia (art. 1742) non calza: Enasarco e ritenuta 23%.
-2. **Base di calcolo** scritta: incassato netto = incassato − IVA − spedizione addebitata − resi −
-   commissioni; fuori: vendite in azienda, fiere, Vera Italia, ristorazione.
-3. **Scaglioni** e revisione obbligatoria a 6 e 12 mesi con i numeri sul tavolo.
+1. **Forma**: con «metà del guadagno» la forma naturale è l'**associazione in partecipazione** (artt.
+   2549-2554 c.c.: Kalab associante, B2Brand associato che apporta servizi; rendiconto per legge). Con la
+   percentuale fissa, contratto di servizi a corrispettivo variabile (fattura mensile con IVA). L'agenzia
+   (art. 1742) non calza: Enasarco e ritenuta 23%. **Domanda chiave al commercialista**: nell'associazione
+   in partecipazione la quota di utili di B2Brand ha IVA o no? Se no, sparisce il 22% che Kalab non può
+   detrarre.
+2. **Conto mensile scritto**: vendite online senza IVA − listino concordato dei costi di prodotto −
+   imballo − spedizione non pagata dal cliente − commissioni − resi − pubblicità − piattaforma = guadagno
+   da dividere; fuori: vendite in azienda, fiere, Vera Italia, ristorazione. Listino dei costi rivisto una
+   volta l'anno.
+3. **Pubblicità**: budget deciso insieme ogni trimestre; B2Brand anticipa e recupera per prima; tetto
+   massimo scritto.
 4. **IVA**: Kalab è nel regime speciale agricolo (ex art. 34 DPR 633/72, oggi artt. 133-138 del Testo
    unico IVA, D.Lgs. 10/2026 in vigore dal 31/1/2026)? Allora **non detrae l'IVA sulle fatture di
-   B2Brand**: 50% + IVA = 61% per lui. Aliquote dei prodotti e contabilità separata per i trasformati.
+   B2Brand**: con una fattura di servizi, ogni 100 € a B2Brand costano 122 € a Kalab. Aliquote dei prodotti e contabilità separata per i trasformati.
 5. **Esclusiva online** di Kalab (marketplace, social, WhatsApp) per la durata.
 6. **Dati**: account Shopify, Meta, Google, Search Console, Stripe intestati a Kalab con accessi
    permanenti a B2Brand; diritto di verifica semestrale.
@@ -651,10 +686,11 @@ sauce, cucina, orto) in IT, DE, FR: dice quanto è grande la platea senza spende
 ## 11. Previsioni: tre scenari a 12 e 36 mesi (aggiornate il 04/10/2026)
 
 Tutto nel foglio «Scenari» di `scenari_kalab.xlsx`, ricalcolato e controllato. Ipotesi comuni: mese 1 =
-marzo 2027 (accordo in autunno, 3-4 mesi di costruzione); rampa di 6 mesi; stagionalità del cap. 2;
-ordine medio 28,17 €; 50% della merce netta; costi di B2Brand del cap. 7. **Ordini al mese** (IPOTESI):
-prudente 20 / 40 / 60; medio 50 / 120 / 200; ambizioso 100 / 250 / 450 (anno 1 / 2 / 3).
-**Pubblicità pagata da B2Brand**: prudente 300 €/mese; medio 400 / 600 / 800; ambizioso 500 / 1.000 / 1.500.
+marzo 2027; rampa di 6 mesi; stagionalità del cap. 2; ordine medio 28,17 €; margine da dividere 17,24 €
+a ordine; **«metà del guadagno»** (cella «Modello» delle Ipotesi; scrivendo «percentuale» si torna alla
+percentuale fissa); nessuna ora conteggiata. **Ordini al mese** (IPOTESI): prudente 20 / 40 / 60; medio
+50 / 120 / 200; ambizioso 100 / 250 / 450 (anno 1 / 2 / 3). **Pubblicità**: prudente 300 €/mese; medio
+400 / 600 / 800; ambizioso 500 / 1.000 / 1.500.
 
 ### 11.1 I tre scenari
 
@@ -662,68 +698,67 @@ prudente 20 / 40 / 60; medio 50 / 120 / 200; ambizioso 100 / 250 / 450 (anno 1 /
 |---|---|---|---|
 | Ordini anno 1 / 2 / 3 | 196 / 480 / 720 | 491 / 1.440 / 2.400 | 979 / 3.004 / 5.404 |
 | Vendite online anno 1 / 2 / 3 | 5.500 € / 13.500 € / 20.300 € | 13.800 € / 40.600 € / 67.600 € | 27.600 € / 84.600 € / 152.300 € |
-| Quota B2Brand anno 1 / 2 / 3 | 2.400 € / 5.900 € / 8.900 € | 6.100 € / 17.800 € / 29.600 € | 12.100 € / 37.100 € / 66.700 € |
-| **Netto di cassa B2Brand, media al mese** anno 1 / 2 / 3 | −450 € / +70 € / +290 € | −245 € / +760 € / **+1.520 €** | +160 € / **+1.970 €** / +3.900 € |
-| Primo mese sopra 1.000 € di cassa | solo un dicembre, mese 34 | **mese 21 (novembre 2028)** | **mese 9 (novembre 2027)** |
-| Rientro dei soldi anticipati | oltre 36 mesi | mese 19 | mese 10 |
-| Massimo di cassa «fuori» | 5.500 € | 4.400 € | 3.700 € |
-| Margine di Kalab anno 1 / 2 / 3 | 1.000 € / 2.400 € / 3.500 € | 2.400 € / 7.100 € / 11.800 € | 4.800 € / 14.700 € / 26.500 € |
+| **B2Brand al mese** anno 1 / 2 / 3 | −160 € / 215 € / 290 € | 80 € / 675 € / **1.250 €** | 380 € / **1.600 €** / 3.060 € |
+| **Kalab al mese** anno 1 / 2 / 3 | 0 € / 55 € / 290 € | 80 € / 675 € / 1.250 € | 380 € / 1.600 € / 3.060 € |
+| Primo mese con 1.000 € a testa | mai | **mese 21 (novembre 2028)** | **mese 10 (dicembre 2027)** |
+| Rientro di B2Brand | mese 22 | mese 9 | mese 6 |
+| Massimo che B2Brand ha «fuori» | 2.100 € | 1.380 € | 855 € |
 
-Il netto di cassa è quota incassata meno spese vive e pubblicità, prima delle tasse di B2Brand. Le ore
-sono a parte (cap. 7.2).
+Nel prudente Kalab prende meno di B2Brand nei primi due anni perché B2Brand si riprende per prima la
+pubblicità anticipata; dal terzo anno pareggiano. Negli altri due scenari prendono la stessa cifra già
+dal primo anno. Tutti i netti sono prima delle tasse.
 
-### 11.2 Quanti ordini servono per 1.000 € al mese
+### 11.2 Quanti ordini servono per 1.000 € al mese a testa
 
-| Pubblicità al mese | Ordini al mese per 1.000 € di cassa | Gli stessi, pagando anche le ore (circa 950 € al mese) |
-|---|---|---|
-| 300 € | 113 | 190 |
-| 400 € | 122 | 199 |
-| 500 € | 130 | 207 |
-| 800 € | 154 | 231 |
-| 1.000 € | 170 | 247 |
+| Pubblicità al mese | Ordini al mese |
+|---|---|
+| 300 € | 139 |
+| 400 € | 145 |
+| 600 € | 157 |
+| 800 € | 168 |
 
-Regola semplice: **ogni 100 € di pubblicità in più al mese chiedono 8 ordini in più** per restare a
-1.000 €. 120-160 ordini al mese sono 4-5 al giorno e circa 3.400-4.500 € di vendite al mese.
+Regola semplice: **ogni 100 € di pubblicità in più al mese chiedono 6 ordini in più**. 145 ordini al
+mese sono 5 al giorno e circa 4.100 € di vendite al mese.
 
 ### 11.3 Cosa sposta il risultato (da provare nel foglio)
 
-- **Ordine medio da 28 a 40 €** (kit, box, spedizione gratis da 49 €): la quota per ordine sale del 40%
-  e gli ordini necessari scendono da circa 120 a circa 85.
-- **Spedizione vera pagata dal cliente**: non cambia B2Brand, alza Kalab di circa 1,40 € a ordine e
-  rende l'accordo più stabile.
+- **Ordine medio da 28 a 40 €** (kit, box, spedizione gratis da 49 €): il guadagno da dividere per
+  ordine sale di circa il 40% e gli ordini necessari scendono da circa 145 a circa 100.
+- **Spedizione vera pagata dal cliente**: circa 1,40 € in più da dividere a ogni ordine.
 - **Ordini B2B dal sito** (bar, ristoranti, botteghe) con listino riservato: pochi clienti, ordini grossi.
-- **Ore di B2Brand**: a 25 ore al mese invece di 37, la soglia «a costo pieno» scende di circa 35 ordini.
 
 ---
 
 ## 12. Verdetto e condizioni (aggiornati il 04/10/2026)
 
-**Conviene, con il 50% sulla merce netta e un catalogo solo di prodotti che viaggiano.** Il costo vero
-delle creme rende sostenibile la proposta di Luciano, purché scritta bene. Le ragioni per entrare restano:
-storia vera, campione in casa, IGP nuova, vuoti di mercato (varietà singole, sito in più lingue,
-abbonamento, gare), concorrenza italiana piccola e poco recensita, nessun problema logistico sui
-prodotti non deperibili, Blend come primo cliente professionale e vetrina.
+**Conviene, con «metà del guadagno» e un catalogo solo di prodotti che viaggiano.** Il costo vero delle
+creme e il lavoro fatto da Claude Code cambiano il quadro del 2 ottobre: il rischio di B2Brand scende a
+un paio di migliaia di euro, e la divisione a metà del guadagno tiene in equilibrio i due a ogni volume.
+Le ragioni per entrare restano: storia vera, campione in casa, IGP nuova, vuoti di mercato (varietà
+singole, sito in più lingue, abbonamento, gare), concorrenza italiana piccola e poco recensita, nessun
+problema logistico sui prodotti non deperibili, Blend come primo cliente professionale e vetrina.
 
 ### La proposta a Luciano
 
-1. **Fase 1, da marzo 2027, Italia.** Sito nuovo, 30-40 prodotti non deperibili (creme, polveri e
-   secco monovarietali, kit in scala di piccantezza, box regalo), condizioni e policy a norma, listing
-   gratuiti su Google, newsletter, 50 schede varietà. Le 300 varietà entrano come tirature limitate in
-   polvere e come racconto. Niente fresco, piantine, semi ed estero nella fase 1.
-2. **Accordo**: 50% della merce venduta online, senza IVA, senza spedizione e senza commissioni di
-   pagamento; 10% sugli ordini B2B dal sito; revisione a soglia. Fattura mensile su un report condiviso.
+1. **Fase 1, da marzo 2027, Italia.** Sito nuovo fatto da Claude Code, 30-40 prodotti non deperibili
+   (creme, polveri e secco monovarietali, kit in scala di piccantezza, box regalo), condizioni e policy a
+   norma, listing gratuiti su Google, newsletter, 50 schede varietà. Niente fresco, piantine, semi ed
+   estero nella fase 1.
+2. **Accordo: metà del guadagno.** Il conto mensile del cap. 7.3, con il listino dei costi di prodotto
+   firmato. B2Brand anticipa piattaforma e pubblicità e le recupera per prima; Kalab non mette soldi.
+   Se Luciano preferisce una percentuale: 50% della merce netta fino a 100 ordini al mese, 42% fino a 250,
+   39% sopra.
 3. **Spedizioni**: ritiro del corriere in azienda, spedizione entro un giorno lavorativo, spedizione
    pagata dal cliente al costo vero o gratis sopra 49 €. Magazzino conto terzi vicino all'hub tra 150 e
    300 ordini al mese. Niente corse quotidiane.
-4. **B2Brand mette**: sito, foto, testi, gestione, 300-500 € al mese di pubblicità. Cassa sotto i
-   4.000 € il primo anno; il resto è tempo.
+4. **Fuori dall'accordo, da decidere**: i video social di Davide.
 5. **Kalab mette**: prodotto, stock minimo scritto sui 10 più venduti, spedizione entro un giorno,
-   etichette a norma, costi veri di tutti i prodotti, accesso ai dati.
+   etichette a norma, accesso ai dati.
 6. **Punti di controllo scritti**: dopo 6 mesi almeno 50 ordini al mese e resi sotto il 3%; dopo 12
    mesi almeno 100. Se sì: fase 2 (Germania e Austria, magazzino conto terzi, abbonamento «varietà del
-   mese», fresco in pre-ordine settimanale da agosto, semi delle varietà iscritte). Se no: si rivede
-   l'accordo con i numeri sul tavolo.
-7. **Prima della firma**: avvocato e commercialista con la scaletta del cap. 7; sito, Search Console e
+   mese», fresco in pre-ordine settimanale da agosto, semi delle varietà iscritte). Se no: si rivede con
+   i numeri sul tavolo.
+7. **Prima della firma**: commercialista e avvocato con la scaletta del cap. 7; sito, Search Console e
    ordini in lettura; chiarezza su laboratorio delle creme e varietà iscritte.
 
 ---

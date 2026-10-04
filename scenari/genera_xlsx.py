@@ -64,6 +64,11 @@ wi.cell(row=r, column=1, value="Obiettivo B2Brand: euro di cassa al mese").font 
 wi.cell(row=r, column=2, value=ACCORDI.get("obiettivo_mese", 1000)).fill = AZZ
 wi.cell(row=r, column=3, value="Quota incassata meno spese vive e pubblicità, prima delle tasse. Le ore di B2Brand sono a parte (foglio Scenari, colonne «costo pieno»).")
 OBIETTIVO = f"Ipotesi!$B${r}"
+r += 1
+wi.cell(row=r, column=1, value="Modello di accordo").font = B
+wi.cell(row=r, column=2, value=ACCORDI.get("modello", "percentuale")).fill = AZZ
+wi.cell(row=r, column=3, value='"margine" = metà a testa di quello che resta dopo prodotto, imballo, spedizione, commissioni, pubblicità e piattaforma (B2Brand anticipa e si riprende per prima i costi); "percentuale" = B2Brand prende la quota qui sopra e paga lei pubblicità e piattaforma')
+MODELLO = f"Ipotesi!$B${r}"
 
 # ---------------------------------------------------------------- Unit economics
 wu = wb.create_sheet("Conti per prodotto")
@@ -118,6 +123,7 @@ SCONTRINO = f"'Conti per prodotto'!$B${r}"
 QUOTA_ORD = f"'Conti per prodotto'!$I${r}"
 MARG_ORD = f"'Conti per prodotto'!$O${r}"
 NETTO_MEDIO = f"'Conti per prodotto'!$G${r}"
+POOL = f"('Conti per prodotto'!$O${r}+'Conti per prodotto'!$I${r})"
 LORDO_MEDIO = f"'Conti per prodotto'!$H${r}"
 r += 1
 wu.cell(row=r, column=1, value="Letture: colonna O = quanto resta a Kalab per ordine dopo prodotto, imballo, spedizione e quota B2Brand. Se è vicino a zero o negativo, con quella quota Kalab lavora gratis.")
@@ -182,74 +188,69 @@ for i, (lab, k) in enumerate(righe, 3):
     wsc.cell(row=i, column=5, value=SCENARI["note"].get(k, ""))
 wsc.column_dimensions["A"].width = 52; wsc.column_dimensions["E"].width = 70
 R0 = 3  # riga ordini1
-# ordini necessari per l'obiettivo
-wsc.cell(row=10, column=1, value="Ordini al mese necessari per l'obiettivo, anno 1").font = B
-wsc.cell(row=11, column=1, value="Ordini al mese necessari per l'obiettivo, anno 2").font = B
-wsc.cell(row=12, column=1, value="Ordini al mese necessari per l'obiettivo, anno 3").font = B
-for bi in range(3):
-    col_s = get_column_letter(2 + bi)
-    for a in (1, 2, 3):
-        c = wsc.cell(row=9 + a, column=2 + bi, value=f"=ROUND(({OBIETTIVO}+{CASSA_MENS[a]}+{col_s}${R0 + 3 + a})/{QUOTA_ORD},0)")
+for k, a in enumerate((1, 2, 3)):
+    wsc.cell(row=10 + k, column=1, value=f"Ordini al mese necessari per l'obiettivo, anno {a}").font = B
+    for bi in range(3):
+        col_s = get_column_letter(2 + bi)
+        adv = f"{col_s}${R0 + 3 + a}"
+        c = wsc.cell(row=10 + k, column=2 + bi,
+                     value=f'=ROUND(IF({MODELLO}="margine",(2*{OBIETTIVO}+{CASSA_MENS[a]}+{adv})/{POOL},({OBIETTIVO}+{CASSA_MENS[a]}+{adv})/{QUOTA_ORD}),0)')
         c.fill = VER; c.border = BOX
-wsc.cell(row=10, column=5, value="= (obiettivo + spese vive del mese + pubblicità dello scenario) ÷ quota di B2Brand per ordine. Le ore di B2Brand non sono contate.")
+wsc.cell(row=10, column=5, value="Con «margine» l'obiettivo vale per entrambi: B2Brand e Kalab prendono la stessa cifra.")
 start = 16
-wsc.cell(row=start - 1, column=1, value="Proiezione mese per mese (formule). Netto di cassa = soldi in tasca a B2Brand; costo pieno = anche le ore a 35 €/h.").font = Font(bold=True, size=12)
-cols = ["Mese", "Anno", "Ordini", "Incasso online (€)", "Quota B2Brand (€)", "Margine Kalab (€)",
-        "Spese vive B2Brand (€)", "Pubblicità (€)", "Netto di cassa B2Brand (€)", "Cumulato di cassa (€)",
-        "Ore interne (valore €)", "Netto a costo pieno (€)", "Cumulato a costo pieno (€)",
-        "(appoggio) mese sopra obiettivo", "(appoggio) mese cassa in attivo", "(appoggio) mese costo pieno in attivo"]
+wsc.cell(row=start - 1, column=1, value="Proiezione mese per mese (formule). Netto = soldi in tasca, prima delle tasse.").font = Font(bold=True, size=12)
+cols = ["Mese", "Anno", "Ordini", "Vendite online (€)", "Margine da dividere (€)", "Spese B2Brand (€)", "Pubblicità (€)",
+        "Da recuperare per B2Brand (€)", "Versato a B2Brand (€)", "Netto B2Brand (€)", "Cumulato B2Brand (€)",
+        "Netto Kalab (€)", "Cumulato Kalab (€)", "(appoggio) mese B2Brand sopra obiettivo", "(appoggio) mese B2Brand in attivo"]
 for bi, s in enumerate(("Prudente", "Medio", "Ambizioso")):
     c0 = 1 + bi * (len(cols) + 1)
-    col_s = get_column_letter(2 + bi)  # B, C, D nelle ipotesi
+    col_s = get_column_letter(2 + bi)
     wsc.cell(row=start, column=c0, value=s).font = Font(bold=True, size=12)
     for j, h in enumerate(cols):
         c = wsc.cell(row=start + 1, column=c0 + j, value=h); c.font = B; c.fill = GRI; c.alignment = Alignment(wrap_text=True); c.border = BOX
-    wsc.row_dimensions[start + 1].height = 42
+    wsc.row_dimensions[start + 1].height = 54
     L = lambda k: get_column_letter(c0 + k)
     for m in range(1, 37):
         rr = start + 1 + m
         anno = (m - 1) // 12 + 1
-        mese_cal = (STAGIONE["mese_avvio"] - 1 + (m - 1)) % 12 + 2  # riga in Stagionalità
+        mese_cal = (STAGIONE["mese_avvio"] - 1 + (m - 1)) % 12 + 2
         ordini_base = f"{col_s}${R0 + anno - 1}"
         rampa = f"{col_s}${R0 + 3}"
-        if anno == 1:
-            ordini = f"=ROUND({ordini_base}*MIN(1,{m}/{rampa})*Stagionalità!$B${mese_cal},0)"
-        else:
-            ordini = f"=ROUND({ordini_base}*Stagionalità!$B${mese_cal},0)"
+        ordini = (f"=ROUND({ordini_base}*MIN(1,{m}/{rampa})*Stagionalità!$B${mese_cal},0)" if anno == 1
+                  else f"=ROUND({ordini_base}*Stagionalità!$B${mese_cal},0)")
+        pool_prev = f"({L(4)}{rr-1}-{L(5)}{rr-1}-{L(6)}{rr-1})"
+        pool = f"({L(4)}{rr}-{L(5)}{rr}-{L(6)}{rr})"
         vals = [m, anno, ordini,
                 f"={L(2)}{rr}*{SCONTRINO}",
-                f"={L(2)}{rr}*{QUOTA_ORD}",
-                f"={L(2)}{rr}*{MARG_ORD}",
+                f"={L(2)}{rr}*{POOL}",
                 f"={CASSA_MENS[anno]}" + (f"+{CASSA_SETUP}" if m == 1 else ""),
                 f"={col_s}${R0 + 3 + anno}",
-                f"={L(4)}{rr}-{L(6)}{rr}-{L(7)}{rr}",
-                f"={L(8)}{rr}" if m == 1 else f"={L(9)}{rr-1}+{L(8)}{rr}",
-                f"={ORE_MENS[anno]}" + (f"+{ORE_SETUP}" if m == 1 else ""),
-                f"={L(8)}{rr}-{L(10)}{rr}",
+                "=0" if m == 1 else f'=IF({MODELLO}="margine",MAX(0,{L(7)}{rr-1}-{pool_prev}),0)',
+                f'=IF({MODELLO}="margine",MIN({L(4)}{rr},{L(5)}{rr}+{L(6)}{rr}+{L(7)}{rr}+0.5*MAX(0,{pool}-{L(7)}{rr})),{L(2)}{rr}*{QUOTA_ORD})',
+                f"={L(8)}{rr}-{L(5)}{rr}-{L(6)}{rr}",
+                f"={L(9)}{rr}" if m == 1 else f"={L(10)}{rr-1}+{L(9)}{rr}",
+                f"={L(4)}{rr}-{L(8)}{rr}",
                 f"={L(11)}{rr}" if m == 1 else f"={L(12)}{rr-1}+{L(11)}{rr}",
-                f'=IF({L(8)}{rr}>={OBIETTIVO},{L(0)}{rr},"")',
-                f'=IF(AND({L(0)}{rr}>1,{L(9)}{rr}>=0),{L(0)}{rr},"")',
-                f'=IF(AND({L(0)}{rr}>1,{L(12)}{rr}>=0),{L(0)}{rr},"")']
+                f'=IF({L(9)}{rr}>={OBIETTIVO},{L(0)}{rr},"")',
+                f'=IF(AND({L(0)}{rr}>1,{L(10)}{rr}>=0),{L(0)}{rr},"")']
         for j, v in enumerate(vals):
             c = wsc.cell(row=rr, column=c0 + j, value=v); c.border = BOX
             if 3 <= j <= 12: c.number_format = "#,##0"
-            if j == 8: c.fill = VER
+            if j in (9, 11): c.fill = VER
             if j >= 13: c.font = Font(color="808080")
     rs = start + 1 + 36 + 2
     first, lastm = start + 2, start + 1 + 36
     def anno_rng(k, a): return f"{L(k)}{first + 12*(a-1)}:{L(k)}{first + 12*a - 1}"
     rows = [
         ("Ordini anno 1 / 2 / 3", [f"=SUM({anno_rng(2,a)})" for a in (1, 2, 3)]),
-        ("Incasso online anno 1 / 2 / 3", [f"=SUM({anno_rng(3,a)})" for a in (1, 2, 3)]),
-        ("Quota B2Brand anno 1 / 2 / 3", [f"=SUM({anno_rng(4,a)})" for a in (1, 2, 3)]),
-        ("Netto di CASSA B2Brand anno 1 / 2 / 3", [f"=SUM({anno_rng(8,a)})" for a in (1, 2, 3)]),
-        ("…media al mese", [f"=SUM({anno_rng(8,a)})/12" for a in (1, 2, 3)]),
-        ("Netto a COSTO PIENO anno 1 / 2 / 3", [f"=SUM({anno_rng(11,a)})" for a in (1, 2, 3)]),
-        ("Margine Kalab anno 1 / 2 / 3", [f"=SUM({anno_rng(5,a)})" for a in (1, 2, 3)]),
-        ("Primo mese con netto di cassa ≥ obiettivo", [f'=IF(MIN({L(13)}{first}:{L(13)}{lastm})=0,"oltre 36",MIN({L(13)}{first}:{L(13)}{lastm}))']),
-        ("Primo mese col cumulato di cassa ≥ 0", [f'=IF(MIN({L(14)}{first}:{L(14)}{lastm})=0,"oltre 36",MIN({L(14)}{first}:{L(14)}{lastm}))']),
-        ("Primo mese col cumulato a costo pieno ≥ 0", [f'=IF(MIN({L(15)}{first}:{L(15)}{lastm})=0,"oltre 36",MIN({L(15)}{first}:{L(15)}{lastm}))']),
-        ("Esposizione massima di cassa (€)", [f"=MIN(0,MIN({L(9)}{first}:{L(9)}{lastm}))"]),
+        ("Vendite online anno 1 / 2 / 3", [f"=SUM({anno_rng(3,a)})" for a in (1, 2, 3)]),
+        ("Netto B2Brand anno 1 / 2 / 3", [f"=SUM({anno_rng(9,a)})" for a in (1, 2, 3)]),
+        ("…al mese", [f"=SUM({anno_rng(9,a)})/12" for a in (1, 2, 3)]),
+        ("Netto Kalab anno 1 / 2 / 3", [f"=SUM({anno_rng(11,a)})" for a in (1, 2, 3)]),
+        ("…al mese", [f"=SUM({anno_rng(11,a)})/12" for a in (1, 2, 3)]),
+        ("Primo mese con B2Brand ≥ obiettivo", [f'=IF(MIN({L(13)}{first}:{L(13)}{lastm})=0,"oltre 36",MIN({L(13)}{first}:{L(13)}{lastm}))']),
+        ("Primo mese col cumulato B2Brand ≥ 0", [f'=IF(MIN({L(14)}{first}:{L(14)}{lastm})=0,"oltre 36",MIN({L(14)}{first}:{L(14)}{lastm}))']),
+        ("Massimo che B2Brand ha «fuori» (€)", [f"=MIN(0,MIN({L(10)}{first}:{L(10)}{lastm}))"]),
     ]
     for k, (lab, fs) in enumerate(rows):
         wsc.cell(row=rs + k, column=c0, value=lab).font = B
@@ -257,6 +258,30 @@ for bi, s in enumerate(("Prudente", "Medio", "Ambizioso")):
             c = wsc.cell(row=rs + k, column=c0 + 3 + i2, value=f); c.fill = VER; c.number_format = "#,##0"
     for j in range(len(cols)):
         wsc.column_dimensions[get_column_letter(c0 + j)].width = 13 if j else 8
+
+# ---------------------------------------------------------------- Equilibrio
+we = wb.create_sheet("Equilibrio")
+we.cell(row=1, column=1, value="Dove B2Brand e Kalab prendono la stessa cifra").font = Font(bold=True, size=12)
+we.cell(row=2, column=1, value="Margine da dividere per ordine (€): merce netta meno prodotto, imballo, spedizione non pagata dal cliente, commissioni e perdite")
+c = we.cell(row=2, column=6, value=f"={POOL}"); c.fill = VER; c.number_format = "0.00"
+we.cell(row=3, column=1, value="Merce netta per ordine (€): senza IVA e senza commissioni")
+c = we.cell(row=3, column=6, value=f"={NETTO_MEDIO}"); c.fill = VER; c.number_format = "0.00"
+hdr = ["Ordini al mese", "Pubblicità al mese (€)", "Spese fisse B2Brand (€)", "% della merce netta che pareggia",
+       "€ a testa al mese (= metà del margine)", "Con la percentuale fissa delle Ipotesi: B2Brand (€)", "…e Kalab (€)"]
+for j, h in enumerate(hdr, 1):
+    c = we.cell(row=5, column=j, value=h); c.font = B; c.fill = GRI; c.alignment = Alignment(wrap_text=True); c.border = BOX
+we.row_dimensions[5].height = 48
+for k, (o, adv) in enumerate(((50, 300), (100, 400), (150, 400), (200, 500), (300, 600), (500, 800)), 6):
+    we.cell(row=k, column=1, value=o).fill = AZZ
+    we.cell(row=k, column=2, value=adv).fill = AZZ
+    we.cell(row=k, column=3, value=f"={CASSA_MENS[1]}+B{k}")
+    c = we.cell(row=k, column=4, value=f"=$F$2/(2*$F$3)+C{k}/(2*$F$3*A{k})"); c.number_format = "0.0%"; c.fill = VER
+    c = we.cell(row=k, column=5, value=f"=($F$2*A{k}-C{k})/2"); c.number_format = "#,##0"; c.fill = VER
+    we.cell(row=k, column=6, value=f"=A{k}*{QUOTA_ORD}-C{k}").number_format = "#,##0"
+    we.cell(row=k, column=7, value=f"=A{k}*{MARG_ORD}").number_format = "#,##0"
+we.cell(row=13, column=1, value="Lettura: B2Brand paga pubblicità e piattaforma, che costano uguale con pochi o tanti ordini; Kalab paga prodotto e spedizione, che crescono con gli ordini. Per questo la percentuale fissa che pareggia scende quando i volumi salgono. «Metà del margine» pareggia a ogni volume senza toccare niente.")
+we.column_dimensions["A"].width = 16
+for col in "BCDEFG": we.column_dimensions[col].width = 18
 
 # ---------------------------------------------------------------- Logistica: corsa all'hub vs magazzino conto terzi
 wl = wb.create_sheet("Logistica")

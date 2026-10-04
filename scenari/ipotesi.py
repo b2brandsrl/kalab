@@ -32,6 +32,10 @@ ACCORDI = dict(
     quota_base=0.50,
     base="netto",
     obiettivo_mese=1000,
+    # «percentuale» = B2Brand prende quota_base della base scelta e paga lei pubblicità e piattaforma.
+    # «margine» = metà a testa di quello che resta dopo prodotto, imballo, spedizione, commissioni,
+    # pubblicità e piattaforma; B2Brand anticipa i costi e se li riprende per prima dai mesi buoni.
+    modello="margine",
     alternative=[
         dict(nome="50% dell'incasso lordo (proposta di Kalab)", base="lordo", quota=0.50, commento="Quota su merce + spedizione incassata, IVA inclusa: la lettura letterale di «50% dell'incasso»."),
         dict(nome="50% dell'incassato netto (senza IVA, spedizione e commissioni)", base="netto", quota=0.50, commento="Stessa percentuale, base più piccola: è la prassi del settore (07 B1e)."),
@@ -56,22 +60,14 @@ SCENARI = dict(
 )
 
 COSTI_B2B = [
-    dict(tipo="ore", voce="Costruzione negozio (Shopify/Woo, tema, app, feed Merchant): ore interne B2Brand", una_tantum=3000, m1=0, m2=0, m3=0,
-         fonte="STIMA 85 ore × 35 €/h di costo interno. Valore di mercato 3.000-7.000 € (07 B2)."),
-    dict(tipo="cassa", voce="Foto: shooting 60-80 referenze + ambiente (campi, Casa Kalab)", una_tantum=1500, m1=0, m2=0, m3=0,
-         fonte="STIMA 1.500-3.500 € freelance (07 B2)."),
-    dict(tipo="ore", voce="Testi: 60-100 schede prodotto + 50 schede varietà iniziali", una_tantum=1000, m1=0, m2=0, m3=0,
-         fonte="STIMA 3 giornate di copy interno."),
-    dict(tipo="cassa", voce="Traduzioni EN+DE (DeepL + revisione umana)", una_tantum=1500, m1=0, m2=0, m3=0,
-         fonte="STIMA 1.500-3.000 € (07 B2); umane 7.000-11.500 € per 4 lingue."),
+    # Decisione di Davide del 04/10/2026: sito, contenuti, traduzioni e gestione li fa Claude Code.
+    # Le ore di B2Brand non entrano nei conti. Restano solo i soldi che escono davvero.
+    dict(tipo="cassa", voce="Avvio: tema, dominio, app, campioni e prove di spedizione", una_tantum=500, m1=0, m2=0, m3=0,
+         fonte="STIMA. Costruzione, testi e traduzioni: Claude Code (abbonamento già pagato da B2Brand)."),
+    dict(tipo="cassa", voce="Foto prodotto", una_tantum=0, m1=0, m2=0, m3=0,
+         fonte="Da decidere: foto in azienda quando Davide scende per i video. I video social NON sono nell'accordo (mai discussi)."),
     dict(tipo="cassa", voce="Piattaforma + app + dominio", una_tantum=0, m1=100, m2=120, m3=150,
          fonte="Shopify Basic 27 €/mese + app 50-150 € (07 B2, listino Shopify 02/10/2026)."),
-    dict(tipo="ore", voce="Gestione mensile: ordini, assistenza, contenuti, newsletter, campagne (ore interne)", una_tantum=0, m1=700, m2=900, m3=1100,
-         fonte="STIMA 20-30 ore/mese × 35 €/h. E-commerce manager in Italia 32-38 k€/anno (Indeed, 07)."),
-    dict(tipo="ore", voce="Manutenzione tecnica e monitoraggio", una_tantum=0, m1=50, m2=50, m3=50,
-         fonte="Keidea: 50-150 €/mese base (07 B2)."),
-    dict(tipo="ore", voce="Schede varietà nuove (SEO): 10-15 al mese", una_tantum=0, m1=200, m2=200, m3=150,
-         fonte="STIMA 6 ore/mese. Senza, le 350 varietà restano una promessa."),
 ]
 
 STAGIONE = dict(
@@ -87,14 +83,15 @@ NOTE_LEGGIMI = [
     "",
     "Le celle AZZURRE sono ipotesi: cambiale e tutto il resto si ricalcola. Le celle VERDI sono i risultati da guardare.",
     "",
-    "Cosa è cambiato il 04/10: costo vero delle creme (~1 € a vasetto, da Luciano); catalogo solo non deperibile (polveri, secco, creme, sott'olio, kit e box: semi, piantine e fresco a mix zero); accordo 50% calcolato sulla merce netta; obiettivo di B2Brand 1.000 € di cassa al mese; nuovo foglio Logistica.",
+    "Cosa è cambiato il 04/10: costo vero delle creme (~1 € a vasetto, da Luciano); catalogo solo non deperibile (polveri, secco, creme, sott'olio, kit e box: semi, piantine e fresco a mix zero); obiettivo 1.000 € al mese; nuovo foglio Logistica. Poi, sempre il 04/10: le ore di B2Brand escono dai conti (sito e contenuti li fa Claude Code) e l'accordo diventa «metà del margine» (foglio Equilibrio); si torna alla percentuale fissa scrivendo «percentuale» nella cella Modello delle Ipotesi.",
     "",
     "Fogli:",
     "• Ipotesi — un «ordine tipo» per categoria: prezzo, IVA, costi, spedizione, commissioni, quota del mix. In fondo: percentuale di B2Brand, base di calcolo («netto» = merce senza IVA e senza commissioni, la spedizione passa a Kalab al costo; «lordo» = tutto l'incasso, IVA e spedizione comprese) e obiettivo mensile di B2Brand.",
     "• Conti per prodotto — per ogni ordine tipo: quanto va a B2Brand e quanto resta a Kalab dopo prodotto, imballo, spedizione e perdite (colonna O).",
-    "• Costi B2Brand — quello che B2Brand anticipa e spende ogni mese, diviso in «cassa» (soldi che escono) e «ore» (tempo interno a 35 €/h).",
+    "• Costi B2Brand — i soldi che B2Brand anticipa e spende ogni mese (le ore non contano: lavora Claude Code). I video social non sono nell'accordo.",
     "• Stagionalità — peso di ogni mese (media = 1), da Google Trends e dai dati del Natale online.",
-    "• Scenari — in alto le leve (ordini, pubblicità) e gli ordini al mese che servono per l'obiettivo; sotto, 36 mesi per scenario con netto di cassa e netto a costo pieno; in fondo il riepilogo (primo mese sopra l'obiettivo, rientro, esposizione).",
+    "• Scenari — in alto le leve (ordini, pubblicità) e gli ordini al mese che servono per l'obiettivo; sotto, 36 mesi per scenario con il netto di B2Brand e di Kalab affiancati; in fondo il riepilogo.",
+    "• Equilibrio — la percentuale della merce netta che dà la stessa cifra a B2Brand e Kalab, secondo i volumi, e quanto prende ciascuno.",
     "• Logistica — quanto costa a ordine la corsa pomeridiana all'hub contro un magazzino conto terzi vicino all'hub.",
     "• Confronto accordi — lo stesso ordine medio con percentuali e basi diverse.",
     "",
