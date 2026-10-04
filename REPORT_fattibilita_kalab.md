@@ -411,8 +411,13 @@ primavera. **Fresco**: in azienda, ai locali, e online solo in prevendita stagio
 
 - **IGP Peperoncino di Calabria**: registrata l'11/06/2026 (Reg. UE 2026/1273; 01 e 06 la confermano
   da fonti diverse). Zona: tutta la regione; specie *Capsicum annuum* fresco ed essiccato, 5.000-70.000
-  SHU, 9 varietà fra cui Pizzitano e Sigaretta. Le varietà *chinense* (Habanero, Reaper) sono fuori.
-  Per usarla: adesione al Consorzio e organismo di controllo (STIMA 300-600 €/anno).
+  SHU, fresco o secco, intero, a pezzi, in scaglie o in polvere. Le varietà ammesse sono 16 secondo
+  Qualivita (corretto il 04/10: prima avevamo scritto 9), fra cui Pizzitano e Sigaretta; il Diavolicchio
+  non compare per nome. Le varietà *chinense* (Habanero, Reaper) sono fuori. Per usarla: adesione al
+  Consorzio e organismo di controllo (STIMA 300-600 €/anno). Una crema o un miele possono dirsi «con
+  peperoncino di Calabria IGP» solo se tutto il peperoncino dentro è IGP, con la percentuale in etichetta
+  e una notifica al Consorzio, che ha fino a 4 mesi per rispondere (art. 27 Reg. UE 2024/1143;
+  ricerca/ambizioso/05 §5).
 - **Bio**: 2 anni di conversione, STIMA 500-1.000 €/anno; Peperita vende tutto bio al 30-50% sopra la
   media: è la leva di prezzo più chiara del settore.
 - Nessun Presidio Slow Food né De.Co. «Diamante» trovati.
