@@ -85,9 +85,10 @@ vendono le varietà a 400-950 €/kg (cap. 3).
    prodotto per tutto il primo anno. Va detto a Luciano prima, non dopo.
 3. **La pubblicità la pagano in due.** Con «metà del margine» ogni euro di pubblicità toglie 50 centesimi
    a Kalab: il budget va deciso insieme, ogni trimestre.
-4. **La trappola IVA.** Con una fattura di servizi, Kalab (regime speciale agricolo) non detrae l'IVA di
-   B2Brand: è un 22% in più che nessuno dei due incassa. Con un'associazione in partecipazione potrebbe
-   non esserci: da chiedere al commercialista (cap. 7).
+4. **La trappola IVA.** Kalab (regime speciale agricolo) non detrae l'IVA sulla quota di B2Brand: è un
+   22% in più che nessuno dei due incassa. Resta anche con l'associazione in partecipazione: per
+   l'Agenzia delle Entrate, se l'associato è una società che apporta servizi, l'utile va fatturato con
+   IVA (Ris. 192/E del 12/05/2008). La toglie una srl comune (cap. 7.3 e `PIANO_ambizioso_kalab.md`).
 5. **Lo stock e l'impresa individuale.** Oggi metà del catalogo di kalab.it è «non disponibile», e Kalab
    è una persona: servono stock minimo scritto, clausole di uscita e accesso ai dati.
 
@@ -567,9 +568,11 @@ pubblicità.
 1. **Forma**: con «metà del guadagno» la forma naturale è l'**associazione in partecipazione** (artt.
    2549-2554 c.c.: Kalab associante, B2Brand associato che apporta servizi; rendiconto per legge). Con la
    percentuale fissa, contratto di servizi a corrispettivo variabile (fattura mensile con IVA). L'agenzia
-   (art. 1742) non calza: Enasarco e ritenuta 23%. **Domanda chiave al commercialista**: nell'associazione
-   in partecipazione la quota di utili di B2Brand ha IVA o no? Se no, sparisce il 22% che Kalab non può
-   detrarre.
+   (art. 1742) non calza: Enasarco e ritenuta 23%. **IVA**: per l'Agenzia delle Entrate (Ris. 192/E del
+   12/05/2008) l'utile di un associato società che apporta servizi va fatturato con IVA, quindi il 22% che
+   Kalab non detrae resta anche qui. Domande al commercialista: se regge un apporto di solo capitale
+   (B2Brand mette i soldi della pubblicità) e se a Kalab conviene l'IVA ordinaria. La srl comune della fase
+   2 elimina il problema (ricerca/ambizioso/07).
 2. **Conto mensile scritto**: vendite online senza IVA − listino concordato dei costi di prodotto −
    imballo − spedizione non pagata dal cliente − commissioni − resi − pubblicità − piattaforma = guadagno
    da dividere; fuori: vendite in azienda, fiere, Vera Italia, ristorazione. Listino dei costi rivisto una
