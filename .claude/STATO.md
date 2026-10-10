@@ -1,6 +1,11 @@
 # STATO — kalab
 
-Aggiornato: 04/10/2026 (notte)
+Aggiornato: 04/10/2026 (notte) · nota del 10/10 sotto
+
+> **10/10 — Girato Blend × Kalab del 2/10 (mattina nei campi) visto tutto**: piano di montaggio e fascicoli in
+> `blend_studio/girato_0210_kalab_blend/` (pagina https://claude.ai/artifact/Qq2s3NFfH79Z5Lnh48uUgH). Utile anche
+> per il sito: finger lime, primo lime calabrese, arancia ovale, Carolina Reaper, Casa Kalab, ritratto «È tutto amore».
+> Kalab ha chiesto di non pubblicare i fichi d'india e la serra con «no video, please».
 
 ## Cos'è
 E-commerce di **Kalab** (KALAB di Luciano Fortunato, Orsomarso/Scalea, 300+ varietà di peperoncino):
